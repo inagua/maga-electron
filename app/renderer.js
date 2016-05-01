@@ -15,8 +15,8 @@ app.controller('MagaMain', function ($scope) {
         {id:5, title:'Woo', desc:'More stuff about this here', category_name:'Category 3'}
     ];
 
-    $scope.setSelectedItem = function(i){
-        $scope.selectedItem = i;
+    $scope.setSelectedItem = function(item){
+        $scope.selectedItem = item;
     };
 
     $scope.deleteItem = function(){
