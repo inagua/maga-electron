@@ -2,27 +2,21 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var app = angular.module('MagaApp', []);
+//var remote = require('electron').remote;
+// $scope.games = remote.getGlobal('games');
+
+var fs = require('fs');
 
 
-app.controller('MagaMain', function ($scope) {
+var angularApp = angular.module('MagaApp', []);
 
-    $scope.data = [
-        {id:1, title:'Foo', desc:'More stuff about this here', category_name:'Category 1'},
-        {id:2, title:'Goo', desc:'More stuff about this here', category_name:'Category 2'},
-        {id:3, title:'Roo', desc:'Blah details on Roo are here', category_name:'Category 1'},
-        {id:4, title:'Hoo', desc:'More stuff about Hoo here', category_name:'Category 2'},
-        {id:5, title:'Woo', desc:'More stuff about this here', category_name:'Category 3'}
-    ];
+angularApp.controller('MagaMain', function ($scope) {
+
+    var path = "/Users/jacques/Dropbox/-work/projects/-github/node-js/maga/maga-crawler-tcc/maga.json";
+    $scope.games = JSON.parse(fs.readFileSync(path,'utf8'));
 
     $scope.setSelectedItem = function(item){
         $scope.selectedItem = item;
-    };
-
-    $scope.deleteItem = function(){
-        if ($scope.selectedItem >= 0) {
-            $scope.data.splice($scope.selectedItem,1);
-        }
     };
 
 });

@@ -18,6 +18,10 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
+  //var path = "/Users/jacques/Dropbox/-work/projects/-github/node-js/maga/maga-crawler-tcc/maga.json";
+  //var games = fs.readFileSync(path,'utf8');
+  //global.games = JSON.parse(games);
+
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows

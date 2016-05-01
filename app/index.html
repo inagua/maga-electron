@@ -31,7 +31,7 @@
     </style>
 
 
-    <script type='text/javascript' src="resources/js/angular-1.5.5.min.js"></script>
+    <!--<script type='text/javascript' src="resources/js/angular-1.5.5.min.js"></script>-->
 
 
 
@@ -66,15 +66,16 @@
           <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <ul class="nav">
               <!--<li class="active"><a href="#">Home</a></li>-->
-              <li ng-repeat="item in data"><a ng-click="setSelectedItem(item)" href="#">{{item.title}}</a></li>
+              <!--<li ng-repeat="item in data"><a ng-click="setSelectedItem(item)" href="#">{{item.title}}</a></li>-->
+              <li ng-repeat="game in games"><a ng-click="setSelectedItem(game)" href="#">{{game.name}}</a></li>
             </ul>
           </div>
 
           <!-- main area -->
           <div class="col-xs-12 col-sm-9">
             <!-- Shrink Width to Collapse Sidebar -->
-            <h1>{{selectedItem.title}}</h1>
-            <p>{{selectedItem.desc}}</p>
+            <h1>{{selectedItem.name}}</h1>
+            <p>{{selectedItem.objectif || selectedItem.url}}</p>
 
 
           </div><!-- /.col-xs-12 main -->
@@ -84,8 +85,9 @@
   </body>
 
   <script>
+
     // You can also require other files to run in this process
-    // require('./resources/js/angular-1.5.5.min.js')
+    require('./resources/js/angular-1.5.5.min.js')
     require('./renderer.js')
 
   </script>
