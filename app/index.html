@@ -75,7 +75,7 @@
           <div class="col-xs-12 col-sm-9">
             <!-- Shrink Width to Collapse Sidebar -->
             <h1>{{selectedItem.name}}</h1>
-            <p>{{selectedItem.objectif || selectedItem.url}}</p>
+            <p>{{selectedItem.objectif}} <a href="" ng-click="gameClicked(selectedItem.url)" target="_blank">{{selectedItem.url}}</a> </p>
 
 
           </div><!-- /.col-xs-12 main -->

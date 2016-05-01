@@ -7,6 +7,7 @@
 
 var fs = require('fs');
 
+const shell = require('electron').shell;
 
 var angularApp = angular.module('MagaApp', []);
 
@@ -17,6 +18,11 @@ angularApp.controller('MagaMain', function ($scope) {
 
     $scope.setSelectedItem = function(item){
         $scope.selectedItem = item;
+    };
+
+    $scope.gameClicked = function(url) {
+        // event.preventDefault();
+        shell.openExternal(url);
     };
 
 });
