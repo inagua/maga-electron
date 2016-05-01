@@ -21,7 +21,6 @@
 
     <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 
-
     <!-- CSS code from Bootply.com editor -->
 
     <style type="text/css">
@@ -32,12 +31,12 @@
     </style>
 
 
-
+    <script type='text/javascript' src="resources/js/angular-1.5.5.min.js"></script>
 
 
 
   </head>
-  <body>
+  <body ng-app="MagaApp" ng-controller="MagaMain">
     <!--<h1>Hello World!</h1>-->
     <!--&lt;!&ndash; All of the Node.js APIs are available in this renderer process. &ndash;&gt;-->
     <!--We are using node <script>document.write(process.versions.node)</script>,-->
@@ -66,10 +65,8 @@
           <!-- sidebar -->
           <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Link 1</a></li>
-              <li><a href="#">Link 2</a></li>
-              <li><a href="#">Link 3</a></li>
+              <!--<li class="active"><a href="#">Home</a></li>-->
+              <li ng-repeat="item in data"><a href="#">{{item.title}}</a></li>
             </ul>
           </div>
 
@@ -89,6 +86,8 @@
 
   <script>
     // You can also require other files to run in this process
+    // require('./resources/js/angular-1.5.5.min.js')
     require('./renderer.js')
+
   </script>
 </html>
