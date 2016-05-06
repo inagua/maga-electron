@@ -361,16 +361,25 @@
                 </div>
 
                 <!-- POPULATION -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gamePopulation" class="col-sm-2 control-label">Population</label>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Participants</label>
+                  <div class="col-sm-5">
+                    <div class = "input-group" title="Minimal count of participants">
+                        <span class = "input-group-addon">Minimum</span>
+                        <input type="text" class="form-control" placeholder="Minimal count of participants" ng-model="selectedGame.participants.min">
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class = "input-group" title="Maximal count of participants">
+                        <span class = "input-group-addon">Maximum</span>
+                        <input type="text" class="form-control" placeholder="Maximal count of participants" ng-model="selectedGame.participants.max">
+                    </div>
                   </div>
                 </div>
 
                 <!-- AGILE -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Agile</label>
+                  <label class="col-sm-2 control-label">Agile Topics</label>
                   <div class="col-sm-10">
 
                     <ul class="form-control-static list-inline" ng-hide="editing">
