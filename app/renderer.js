@@ -122,6 +122,15 @@ angularApp.controller('MagaMain', function ($scope) {
                 }
             });
         }
+        $scope.games = $scope.games.sort(function (a, b) {
+            if (!a || !a.name || a.name.trim().length == 0) {
+                return 1;
+            }
+            if (!b || !b.name || b.name.trim().length == 0) {
+                return -1;
+            }
+            return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
+        })
     };
     $scope.clearFilterButtonClicked = function() {
         clearFilterFields();
