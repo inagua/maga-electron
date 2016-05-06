@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="" />
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/css/offcanvas3.css" rel="stylesheet">
+    <!-- link href="resources/css/offcanvas3.css" rel="stylesheet" -->
 
     <!--<link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">-->
     <!--<link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">-->
@@ -168,7 +168,16 @@
 
           <!-- sidebar -->
           <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <input type="text" class="form-control" placeholder="Filter on name" ng-model="gameFilterPattern">
+            <div class = "input-group">
+              <input type="text" class="form-control" placeholder="Filter on name" ng-model="gameFilterPattern">
+
+               <span class = "input-group-btn">
+                 <!-- <i class="fa fa-times"></i><i class="fa fa-times-circle-o"></i> -->
+                  <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()">X</button>
+               </span>
+
+            </div><!-- /input-group -->
+
             <div class="checkbox">
               <label>
                 <input type="checkbox" ng-model="gameFilterFullSearch"> Search all fields?
