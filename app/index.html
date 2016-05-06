@@ -167,16 +167,14 @@
         <div class="row row-offcanvas row-offcanvas-left">
 
           <!-- sidebar -->
-          <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div class = "input-group">
+          <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation" style="background-color: linen; margin-top: -45px;">
+
+            <div class = "input-group" style="padding-right: 15px; padding-top: 35px;">
               <input type="text" class="form-control" placeholder="Filter on name" ng-model="gameFilterPattern">
-
-               <span class = "input-group-btn">
-                 <!-- <i class="fa fa-times"></i><i class="glyphicon glyphicon-remove-circle"></i> -->
-                  <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()"><i class="fa fa-times-circle fa-lg"></i></button>
-               </span>
-
-            </div><!-- /input-group -->
+              <span class = "input-group-btn">
+                <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()"><i class="fa fa-times-circle fa-lg"></i></button>
+              </span>
+            </div>
 
             <div class="checkbox">
               <label title="Can search JSON attributes (ex: '&quot;rating&quot;:3')">
