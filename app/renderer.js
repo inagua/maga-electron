@@ -92,6 +92,7 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.selectedGame = undefined;
         setupKnownFieldsValues();
         clearFilterFields();
+        sortGames();
     };
     loadJson();
 

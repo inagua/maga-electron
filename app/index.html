@@ -215,9 +215,10 @@
 
               <!-- NOT YET IMPLEMENTED -->
               <div class="form-group">
-                <label for="gameName" class="col-sm-2 control-label"></label>
-                <div class="col-sm-10">
+                <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
+                    <button type="submit" class="btn btn-info" ng-click="editionButtonClicked()" >{{editionButtonTitle}}</button>
+                    <button type="submit" class="btn btn-danger" ng-click="removeButtonClicked()" ng-show="editing">Remove</button>
                     <label>
                       <input type="checkbox" ng-model="showNotYetImplemented"> Show not yet implemented?
                     </label>
