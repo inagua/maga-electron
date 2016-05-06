@@ -11,15 +11,18 @@ var fs = require('fs.extra');
 const shell = require('electron').shell;
 
 var angularApp = angular.module('MagaApp', []);
-var BUTTON_EDITION_EDIT = "Edit";
+var BUTTON_EDITION_EDIT = "  Edit  ";
 var BUTTON_EDITION_VALIDATE = "Validate";
 
 angularApp.controller('MagaMain', function ($scope) {
 
-    var path = "maga-light.json";
-    $scope.allGames = JSON.parse(fs.readFileSync(path,'utf8'));
-    $scope.games = $scope.allGames;
-    $scope.selectedGame = undefined;
+    $scope.jsonURL = "maga-light.json";
+    var loadJson = function () {
+        $scope.allGames = JSON.parse(fs.readFileSync($scope.jsonURL,'utf8'));
+        $scope.games = $scope.allGames;
+        $scope.selectedGame = undefined;
+    };
+    loadJson();
     $scope.editing = false;
 
     $scope.selectGame = function(game){
@@ -50,16 +53,20 @@ angularApp.controller('MagaMain', function ($scope) {
         updateEditionButton();
     };
 
+    $scope.loadButtonClicked = function() {
+        loadJson();
+    };
+
     $scope.saveButtonClicked = function() {
         // backup
-        var newPath = path.replace(".json", "-"+new Date().toISOString()+".json").replace(/:/g, '-');
-        fs.copy(path, newPath, { replace: false }, function (err) {
+        var newPath = $scope.jsonURL.replace(".json", "-"+new Date().toISOString()+".json").replace(/:/g, '-');
+        fs.copy($scope.jsonURL, newPath, { replace: false }, function (err) {
             if (err) { throw err; }
             console.log("JSON backuped as:", newPath);
 
             // save
             var json = JSON.stringify($scope.games, null, 4);
-            fs.writeFile(path, json, function (err) {
+            fs.writeFile($scope.jsonURL, json, function (err) {
                 if (err) return console.log(err);
                 console.log('JSON saved!');
             });
