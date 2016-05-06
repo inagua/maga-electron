@@ -464,19 +464,43 @@
                   </div>
                 </div>
 
-                <!-- RESOURCES -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gameResources" class="col-sm-2 control-label">Resources</label>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
-                  </div>
-                </div>
-
                 <!-- PERFORMANCES -->
                 <div class="form-group" ng-show="showNotYetImplemented">
                   <label for="gamePerformances" class="col-sm-2 control-label">Performances</label>
                   <div class="col-sm-10">
                     <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- RESOURCES -->
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Resources</label>
+                  <div class="col-sm-10">
+
+
+                    <ul class="form-control-static" ng-hide="editing">
+                      <li class="" ng-repeat="r in selectedGame.resources" title="{{r.details + '\n(' + r.url + ')'}}"><a href="" ng-click="gameClicked(r.url)" target="_blank">{{r.name}}</a>
+                        <span ng-show="r.type">&nbsp;({{r.type}})</span>
+                      </li>
+                    </ul>
+
+                    <span ng-show="editing">
+                      <ul class="form-control-static">
+                        <li class="" ng-repeat="r in selectedGame.resources" title="{{r.details + '\n(' + r.url + ')'}}">
+                          <a href="" ng-click="gameClicked(r.url)" target="_blank">{{r.name}}</a>
+                          <span ng-show="r.type">&nbsp;({{r.type}})</span>
+                          &nbsp;<button class = "btn btn-danger btn-xs" type="button" ng-click="removeResource(r)">(x)</button>
+                        </li>
+                      </ul>
+
+                      <input type="text" class="form-control input-sm" style="margin-top: 1px;" placeholder="Resource Name" ng-model="newResourceName">
+                      <input type="text" class="form-control input-sm" style="margin-top: 1px;" placeholder="Resource Type" ng-model="newResourceType">
+                      <input type="text" class="form-control input-sm" style="margin-top: 1px;" placeholder="Resource Details" ng-model="newResourceDetails">
+                      <input type="text" class="form-control input-sm" style="margin-top: 1px;" placeholder="Resource URL" ng-model="newResourceUrl">
+                      <button class = "btn btn-success btn-sm" style="margin-top: 1px;" type="button" ng-click="addResource()">Add Resource</button>
+                    </span>
+
+
                   </div>
                 </div>
 

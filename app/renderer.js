@@ -243,4 +243,27 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.useAgileTopic = function (topic) {
         pushAgileTopic(topic);
     };
+
+
+    // RESOURCES
+    //
+    $scope.removeResource = function (resource) {
+        var i = $scope.selectedGame.resources.indexOf(resource);
+        if (i > -1) {
+            $scope.selectedGame.resources.splice(i, 1);
+        }
+    };
+    var isFull = function(string) {
+        return string && string.trim().length > 0;
+    };
+    $scope.addResource = function () {
+        if (isFull($scope.newResourceName) && isFull($scope.newResourceUrl)) {
+            var newResource = {"name":$scope.newResourceName, "details":$scope.newResourceDetails, "type":$scope.newResourceType, "url":$scope.newResourceUrl};
+            if (!$scope.selectedGame.resources) {
+                $scope.selectedGame.resources = [];
+            }
+            $scope.selectedGame.resources.push(newResource);
+            $scope.newResourceName = $scope.newResourceDetails = $scope.newResourceType = $scope.newResourceUrl = undefined;
+        }
+    };
 });
