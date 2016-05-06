@@ -64,7 +64,7 @@ angularApp.controller('MagaMain', function ($scope) {
                     });
                 }
             });
-            $scope.knownStatus = "" + Object.keys(statusMap).sort();
+            $scope.knownStatus = Object.keys(statusMap).sort();
             $scope.knownAgileTopics = Object.keys(agileMap).sort();
         }
     };

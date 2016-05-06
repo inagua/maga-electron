@@ -273,7 +273,12 @@
                 <div class="form-group">
                   <label for="gameStatus" class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gameStatus" placeholder="Status {{knownStatus}}" ng-model="selectedGame.status" title="{{knownStatus}}">
+                    <input type="text" class="form-control" id="gameStatus" placeholder="Status: {{knownStatus}}" ng-model="selectedGame.status" title="{{knownStatus}}">
+                    <ul class="form-control-static list-inline" ng-show="editing">
+                      <li class="label label-success" ng-repeat="s in knownStatus" style="margin-left: 5px;">
+                        <a ng-click="selectedGame.status=s" href="" style="color: white; text-decoration: none;"><i class="fa fa-check-circle fa-1x"></i>&nbsp;&nbsp;{{s}}&nbsp;</a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
 
