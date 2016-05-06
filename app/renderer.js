@@ -21,7 +21,11 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.editing = false;
 
     $scope.selectGame = function(game){
-        $scope.selectedGame = game;
+        if ($scope.selectedGame == game) {
+            $scope.selectedGame = undefined;
+        } else {
+            $scope.selectedGame = game;
+        }
 
         $scope.editing = false;
         updateEditionButton();
