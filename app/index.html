@@ -179,7 +179,7 @@
             </div><!-- /input-group -->
 
             <div class="checkbox">
-              <label>
+              <label title="Can search JSON attributes (ex: '&quot;rating&quot;:3')">
                 <input type="checkbox" ng-model="gameFilterFullSearch"> Search all fields?
               </label>
             </div>
@@ -329,10 +329,24 @@
                 </div>
 
                 <!-- RATING -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gameRating" class="col-sm-2 control-label">Rating</label>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Rating</label>
                   <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
+                    <p class="form-control-static" ng-show="editing" style="color:#337ab7; cursor: pointer;">
+                      <i class="fa fa-times-circle" title="0" ng-click="selectedGame.rating=0"></i>&nbsp;
+
+                      <span ng-repeat="i in [1,2,3,4,5]">
+                        <i class="fa fa-heart" title="{{i}}" ng-show="selectedGame.rating>=i" ng-click="selectedGame.rating=i"></i>
+                        <i class="fa fa-heart-o" title="{{i}}" ng-show="!selectedGame.rating||selectedGame.rating<i" ng-click="selectedGame.rating=i"></i>
+                      </span>
+
+                    </p>
+                    <p class="form-control-static" ng-hide="editing">
+                      <span ng-repeat="i in [1,2,3,4,5]">
+                        <i class="fa fa-heart" title="{{i}}" ng-show="selectedGame.rating>=i"></i>
+                        <i class="fa fa-heart-o" title="{{i}}" ng-show="!selectedGame.rating||selectedGame.rating<i"></i>
+                      </span>
+                    </p>
                   </div>
                 </div>
 
