@@ -150,4 +150,12 @@ angularApp.controller('MagaMain', function ($scope) {
             filterUpdated();
         }
     };
+    
+    // GENERATE ID
+    //
+    $scope.generateIdClicked = function () {
+        if ($scope.selectedGame) {
+            $scope.selectedGame.gameId = $scope.selectedGame.name.toLowerCase().replace(/ /g, '-');
+        }
+    }
 });
