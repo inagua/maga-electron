@@ -198,7 +198,7 @@
             <ul class="nav">
               <!--<li class="active"><a href="#">Home</a></li>-->
               <!--<li ng-repeat="item in data"><a ng-click="setSelectedItem(item)" href="#">{{item.title}}</a></li>-->
-              <li ng-repeat="game in games"><a ng-click="selectGame(game)" href="#">{{game.name}}</a></li>
+              <li ng-repeat="game in games"><a ng-click="selectGame(game)" href="#">{{game.nameToSort || game.name}}</a></li>
             </ul>
           </div>
 
@@ -235,20 +235,30 @@
                   </div>
                 </div>
 
+                <!-- SORT NAME -->
+                <div class="form-group">
+                  <label for="gameNameToSort" class="col-sm-2 control-label">Sort Name</label>
+                  <div class="col-sm-10">
+                    <div class = "input-group" >
+                      <input type="text" class="form-control" id="gameNameToSort" placeholder="Sort Name" ng-model="selectedGame.nameToSort">
+                      <span class = "input-group-btn">
+                        <button class = "btn btn-primary" type="button" ng-click="generateSortNameClicked()">Generate</button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- ID -->
                 <div class="form-group">
                   <label for="gameName" class="col-sm-2 control-label">ID</label>
                   <div class="col-sm-10">
-
                     <!-- p class="form-control-static" ng-show="selectedGame.gameId"><label>{{selectedGame.gameId}}</label></p -->
-
                     <div class = "input-group" > <!-- ng-hide="selectedGame.gameId" -->
                       <input type="text" class="form-control" id="gameID" placeholder="ID" ng-model="selectedGame.gameId">
                       <span class = "input-group-btn">
                         <button class = "btn btn-primary" type="button" ng-click="generateIdClicked()">Generate</button>
                       </span>
                     </div>
-
                   </div>
                 </div>
 

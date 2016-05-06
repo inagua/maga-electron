@@ -31,6 +31,34 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.editing = false;
     $scope.showNotYetImplemented = false;
 
+
+    // Search
+    //
+    var sortNameOf = function (game) {
+        if (game) {
+            var name = game.nameToSort || game.name;
+            if (name && name.trim().length > 0) {
+                return name.toUpperCase();
+            }
+        }
+        return undefined;
+    };
+    function sortGames() {
+        $scope.games.sort(function (a, b) {
+            var aName = sortNameOf(a);
+            if (!aName) {
+                return 1;
+            }
+            var bName = sortNameOf(b);
+            if (!bName) {
+                return -1;
+            }
+            return aName.localeCompare(bName);
+        })
+    }
+
+    // UI CALLBACKS
+    //
     $scope.selectGame = function(game){
         if ($scope.selectedGame == game) {
             $scope.selectedGame = undefined;
@@ -51,6 +79,7 @@ angularApp.controller('MagaMain', function ($scope) {
         if ($scope.selectedGame) {
             if ($scope.editing) {
                 $scope.selectedGame.updated = new Date();
+                sortGames();
             }
             $scope.editing = !$scope.editing;
         } else {
@@ -123,15 +152,7 @@ angularApp.controller('MagaMain', function ($scope) {
                 }
             });
         }
-        $scope.games = $scope.games.sort(function (a, b) {
-            if (!a || !a.name || a.name.trim().length == 0) {
-                return 1;
-            }
-            if (!b || !b.name || b.name.trim().length == 0) {
-                return -1;
-            }
-            return a.name.toUpperCase().localeCompare(b.name.toUpperCase());
-        })
+        sortGames();
     };
     $scope.clearFilterButtonClicked = function() {
         clearFilterFields();
@@ -156,6 +177,14 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.generateIdClicked = function () {
         if ($scope.selectedGame) {
             $scope.selectedGame.gameId = $scope.selectedGame.name.toLowerCase().replace(/ /g, '-');
+        }
+    }
+
+    // GENERATE ID
+    //
+    $scope.generateSortNameClicked = function () {
+        if ($scope.selectedGame) {
+            $scope.selectedGame.nameToSort = $scope.selectedGame.name;
         }
     }
 });
