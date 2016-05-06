@@ -10,19 +10,44 @@ var fs = require('fs');
 const shell = require('electron').shell;
 
 var angularApp = angular.module('MagaApp', []);
+var BUTTON_EDITION_EDIT = "Edit";
+var BUTTON_EDITION_VALIDATE = "Validate";
 
 angularApp.controller('MagaMain', function ($scope) {
 
-    var path = "/Users/jacques/Dropbox/-work/projects/-github/node-js/maga/maga-crawler-tcc/maga.json";
+    var path = "maga-light.json";
     $scope.games = JSON.parse(fs.readFileSync(path,'utf8'));
+    $scope.selectedGame = undefined;
+    $scope.editing = false;
 
-    $scope.setSelectedItem = function(item){
-        $scope.selectedItem = item;
+    $scope.selectGame = function(game){
+        $scope.selectedGame = game;
+
+        $scope.editing = false;
+        updateEditionButton();
     };
 
     $scope.gameClicked = function(url) {
         // event.preventDefault();
         shell.openExternal(url);
     };
+
+    $scope.editionButtonClicked = function() {
+        if ($scope.selectedGame) {
+            $scope.editing = !$scope.editing;
+        } else {
+            $scope.editing = false;
+        }
+        updateEditionButton();
+    };
+
+    var updateEditionButton = function () {
+        if ($scope.editing && $scope.selectedGame) {
+            $scope.editionButtonTitle = BUTTON_EDITION_VALIDATE;
+        } else {
+            $scope.editionButtonTitle = BUTTON_EDITION_EDIT;
+        }
+    };
+    updateEditionButton();
 
 });

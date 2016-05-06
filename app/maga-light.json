@@ -1,0 +1,95 @@
+[
+  {
+    "name":"La balle supersonique",
+    "name-vo":"",
+    "url":"http://www.agilegamesfrance.fr/index.php?title=La_balle_supersonique",
+    "synopsis":"Explorer la dynamique de groupe à résoudre un problème en collectif",
+    "details":"",
+    "goals":"Le challenge donné est de faire circuler une balle dans un groupe de 20 personnes (par exemple) dans un ordre précis… avec la durée la plus courte possible ! Chaque tentative nous permet d’observer les vertus de l’incrémental et de la construction de groupe (leadership/followership). Et ça donne des résultats ! Premier tour : 20s, 2e tour : 10s… et nous ne vous dirons pas jusqu’où il est possible d’aller ;)",
+    "type":"Simulatif",
+    "rating": -1,
+    "author" :"",
+    "source":"http://agilegamesfrance.fr",
+    "minutes":{"min":30, "max":30},
+    "participants":{"min":5, "max":20},
+    "agile":[],
+    "profils":["équipe"],
+    "material":["une balle en mousse/de ping-pong/..."],
+    "logistics":["Une salle avec de l'espace"],
+    "preparations":["rapide"],
+    "notes":[],
+    "see": [],
+    "tags":[],
+    "resources":[{"name":"", "type":"", "url":""}],
+    "performances": [{"date":"", "place":"", "notes":""}],
+    "status":"crawled",
+    "updated": "2016-04-30T22:29:41.093Z"
+  },
+  {
+    "name":"A la (Re)découverte du Manifeste Agile",
+    "url":"http://talondagile.fr/ateliers/",
+    "goals":"(re)parcourir les 4 valeurs et 12 principes du Manifeste Agile.",
+    "synopsis":"Et comme ces 16 concepts sont quand même assez abstraits, ce jeu se joue avec des Légo® évidemment !",
+    "details":"",
+    "type":"",
+    "rating": -1,
+    "author":"Romain COUTURIER",
+    "source":"",
+    "minutes":{"min":120, "max":180},
+    "participants":{"min":-1, "max":-1},
+    "agile":["manifesto"],
+    "profiles":[],
+    "material":[],
+    "logistics":[],
+    "preparations":[],
+    "notes":[],
+    "see":[],
+    "tags":["lego"],
+    "resources":[],
+    "performances":[],
+    "status":"todo",
+    "updated": "2016-05-02T03:00:00.000Z"
+  },
+  {
+    "name": "Agile",
+    "url": "http://tastycupcakes.org/category/agile/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:41.093Z"
+  },
+  {
+    "name": "Agile Jenga Testing Game",
+    "url": "http://tastycupcakes.org/2016/03/agile-jenga-testing-game/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:42.224Z"
+  },
+  {
+    "name": "Silent Collaboration",
+    "url": "http://tastycupcakes.org/2015/11/silent-collaboration/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:42.234Z"
+  },
+  {
+    "name": "The Roast",
+    "url": "http://tastycupcakes.org/2016/02/the-roast/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:42.243Z"
+  },
+  {
+    "name": "The Job Title Game",
+    "url": "http://tastycupcakes.org/2016/01/the-job-title-game/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:42.247Z"
+  },
+  {
+    "name": "JargonBust",
+    "url": "http://tastycupcakes.org/2015/10/jargonbust/",
+    "source": "http://tastycupcakes.org",
+    "status": "crawled",
+    "updated": "2016-04-30T22:29:42.252Z"
+  }
+]

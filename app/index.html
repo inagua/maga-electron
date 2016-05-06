@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="" />
     <link href="resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="resources/css/offcanvas3.css" rel="stylesheet">
 
     <!--<link rel="apple-touch-icon" href="/bootstrap/img/apple-touch-icon.png">-->
     <!--<link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">-->
@@ -25,8 +26,60 @@
 
     <style type="text/css">
       body {
-        padding-top: 50px;
+        padding-top: 51px;
       }
+      .text-center {
+        padding-top: 20px;
+      }
+      .col-xs-12 {
+        background-color: #fff;
+      }
+      #sidebar {
+        height: 100%;
+        padding-right: 0;
+        padding-top: 20px;
+      }
+      #sidebar .nav {
+        width: 95%;
+      }
+      #sidebar li {
+        border:0 #f2f2f2 solid;
+        border-bottom-width:1px;
+      }
+
+      /* collapsed sidebar styles */
+      @media screen and (max-width: 767px) {
+        .row-offcanvas {
+          position: relative;
+          -webkit-transition: all 0.25s ease-out;
+          -moz-transition: all 0.25s ease-out;
+          transition: all 0.25s ease-out;
+        }
+        .row-offcanvas-right
+        .sidebar-offcanvas {
+          right: -41.6%;
+        }
+
+        .row-offcanvas-left
+        .sidebar-offcanvas {
+          left: -41.6%;
+        }
+        .row-offcanvas-right.active {
+          right: 41.6%;
+        }
+        .row-offcanvas-left.active {
+          left: 41.6%;
+        }
+        .sidebar-offcanvas {
+          position: absolute;
+          top: 0;
+          width: 41.6%;
+        }
+        #sidebar {
+          padding-top:0;
+        }
+      }
+
 
     </style>
 
@@ -67,15 +120,47 @@
             <ul class="nav">
               <!--<li class="active"><a href="#">Home</a></li>-->
               <!--<li ng-repeat="item in data"><a ng-click="setSelectedItem(item)" href="#">{{item.title}}</a></li>-->
-              <li ng-repeat="game in games"><a ng-click="setSelectedItem(game)" href="#">{{game.name}}</a></li>
+              <li ng-repeat="game in games"><a ng-click="selectGame(game)" href="#">{{game.name}}</a></li>
             </ul>
           </div>
 
           <!-- main area -->
           <div class="col-xs-12 col-sm-9">
             <!-- Shrink Width to Collapse Sidebar -->
-            <h1>{{selectedItem.name}}</h1>
-            <p>{{selectedItem.objectif}} <a href="" ng-click="gameClicked(selectedItem.url)" target="_blank">{{selectedItem.url}}</a> </p>
+            <h1>{{selectedGame.name}}</h1>
+            <p>{{selectedGame.objectif}} <a href="" ng-click="gameClicked(selectedGame.url)" target="_blank">{{selectedGame.url}}</a> </p>
+
+
+
+            <form class="form-horizontal">
+              <!-- div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                </div>
+              </div -->
+              <div class="form-group">
+                <label for="gameName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="gameName" placeholder="Name" ng-model="selectedGame.name" ng-disabled="!editing">
+                </div>
+              </div>
+              <!-- div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Remember me
+                    </label>
+                  </div>
+                </div>
+              </div -->
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-default" ng-click="editionButtonClicked()" ng-disabled="!selectedGame">{{editionButtonTitle}}</button>
+                </div>
+              </div>
+            </form>
+
 
 
           </div><!-- /.col-xs-12 main -->
