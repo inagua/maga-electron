@@ -52,9 +52,6 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.saveButtonClicked = function() {
         // backup
         var newPath = path.replace(".json", "-"+new Date().toISOString()+".json").replace(/:/g, '-');
-        // console.log('>>>>> COPY: from:', path);
-        // console.log('>>>>> COPY: to  :', newPath);
-        // fs.createReadStream(path).pipe(fs.createWriteStream(newPath));
         fs.copy(path, newPath, { replace: false }, function (err) {
             if (err) { throw err; }
             console.log("JSON backuped as:", newPath);
@@ -77,4 +74,14 @@ angularApp.controller('MagaMain', function ($scope) {
     };
     updateEditionButton();
 
+    var setupKnownStatus = function () {
+        if ($scope.games) {
+            var statusMap = {};
+            $scope.games.forEach(function (g) {
+                statusMap[g.status] = "ok";
+            });
+            $scope.knownStatus = "" + Object.keys(statusMap).sort();
+        }
+    }
+    setupKnownStatus();
 });

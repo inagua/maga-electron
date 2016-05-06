@@ -134,36 +134,208 @@
             <button ng-hide="selectedGame" type="submit" class="btn btn-default" ng-click="saveButtonClicked()" ng-disabled="!games">Save Games</button>
 
             <form class="form-horizontal" ng-show="selectedGame">
-              <!-- div class="form-group">
+              <fieldset ng-disabled="!editing">
+
+                <!-- NAME -->
+                <div class="form-group">
+                  <label for="gameName" class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameName" placeholder="Name" ng-model="selectedGame.name">
+                  </div>
+                </div>
+
+                <!-- UPDATED -->
+                <div class="form-group">
+                  <label for="gameName" class="col-sm-2 control-label">Updated</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">{{selectedGame.updated}}</p>
+                  </div>
+                </div>
+
+                <!-- STATUS -->
+                <div class="form-group">
+                  <label for="gameStatus" class="col-sm-2 control-label">Status</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameStatus" placeholder="Status {{knownStatus}}" ng-model="selectedGame.status" title="{{knownStatus}}">
+                  </div>
+                </div>
+
+                <!-- NAME VO -->
+                <div class="form-group">
+                  <label for="gameNameVO" class="col-sm-2 control-label">Name VO</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameNameVO" placeholder="Name VO" ng-model="selectedGame.nameVo">
+                  </div>
+                </div>
+
+                <!-- URL -->
+                <div class="form-group">
+                  <label for="gameUrl" class="col-sm-2 control-label">URL</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameUrl" placeholder="URL" ng-model="selectedGame.url">
+                  </div>
+                </div>
+
+                <!-- SYNOPSIS -->
+                <div class="form-group">
+                  <label for="gameSynopsis" class="col-sm-2 control-label">Synopsis</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameSynopsis" rows="2" placeholder="Synopsis" ng-model="selectedGame.synopsis"></textarea>
+                  </div>
+                </div>
+
+                <!-- DETAILS -->
+                <div class="form-group">
+                  <label for="gameDetails" class="col-sm-2 control-label">Details</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameDetails" rows="3" placeholder="Details" ng-model="selectedGame.details"></textarea>
+                  </div>
+                </div>
+
+                <!-- GOALS -->
+                <div class="form-group">
+                  <label for="gameGoals" class="col-sm-2 control-label">Goals</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameGoals" rows="3" placeholder="Goals" ng-model="selectedGame.goals"></textarea>
+                  </div>
+                </div>
+
+                <!-- TYPE -->
+                <div class="form-group">
+                  <label for="gameType" class="col-sm-2 control-label">Type</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameType" placeholder="Type" ng-model="selectedGame.type">
+                  </div>
+                </div>
+
+                <!-- RATING -->
+                <div class="form-group">
+                  <label for="gameRating" class="col-sm-2 control-label">Rating</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- AUTHOR -->
+                <div class="form-group">
+                  <label for="gameAuthor" class="col-sm-2 control-label">Author</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameAuthor" placeholder="Author" ng-model="selectedGame.author">
+                  </div>
+                </div>
+
+                <!-- SOURCE -->
+                <div class="form-group">
+                  <label for="gameSource" class="col-sm-2 control-label">Source</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gameSource" placeholder="Source" ng-model="selectedGame.source">
+                  </div>
+                </div>
+
+                <!-- DURATION -->
+                <div class="form-group">
+                  <label for="gameDuration" class="col-sm-2 control-label">Duration</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- POPULATION -->
+                <div class="form-group">
+                  <label for="gamePopulation" class="col-sm-2 control-label">Population</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- AGILE -->
+                <div class="form-group">
+                  <label for="gameAgile" class="col-sm-2 control-label">Agile</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- PROFILS -->
+                <div class="form-group">
+                  <label for="gameProfils" class="col-sm-2 control-label">Profils</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- MATERIAL -->
+                <div class="form-group">
+                  <label for="gameMaterial" class="col-sm-2 control-label">Material</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameMaterial" rows="2" placeholder="Material" ng-model="selectedGame.material[0]"></textarea>
+                  </div>
+                </div>
+
+                <!-- LOGISTICS -->
+                <div class="form-group">
+                  <label for="gameLogistics" class="col-sm-2 control-label">Logistics</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameLogistics" rows="2" placeholder="Logistics" ng-model="selectedGame.logistics[0]"></textarea>
+                  </div>
+                </div>
+
+                <!-- Preparations -->
+                <div class="form-group">
+                  <label for="gamePreparations" class="col-sm-2 control-label">Preparations</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="gamePreparations" placeholder="Preparations" ng-model="selectedGame.preparations[0]">
+                  </div>
+                </div>
+
+                <!-- NOTES -->
+                <div class="form-group">
+                  <label for="gameNotes" class="col-sm-2 control-label">Notes</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- SEE -->
+                <div class="form-group">
+                  <label for="gameSee" class="col-sm-2 control-label">See</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- TAGS -->
+                <div class="form-group">
+                  <label for="gameTags" class="col-sm-2 control-label">Tags</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- RESOURCES -->
+                <div class="form-group">
+                  <label for="gameResources" class="col-sm-2 control-label">Resources</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+                <!-- PERFORMANCES -->
+                <div class="form-group">
+                  <label for="gamePerformances" class="col-sm-2 control-label">Performances</label>
+                  <div class="col-sm-10">
+                    <p class="form-control-static">### TODO ###</p>
+                  </div>
+                </div>
+
+
+
+                <!-- div class="form-group">
                 <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
                   <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
                 </div>
               </div -->
-              <div class="form-group">
-                <label for="gameName" class="col-sm-2 control-label">Updated</label>
-                <div class="col-sm-10">
-                  <p class="form-control-static">{{selectedGame.updated}}</p>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gameName" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="gameName" placeholder="Name" ng-model="selectedGame.name" ng-disabled="!editing">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gameSynopsis" class="col-sm-2 control-label">Synopsis</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" id="gameSynopsis" rows="3" placeholder="Synopsis" ng-model="selectedGame.synopsis" ng-disabled="!editing"></textarea>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gameGoals" class="col-sm-2 control-label">Goals</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" id="gameGoals" rows="3" placeholder="Goals" ng-model="selectedGame.goals" ng-disabled="!editing"></textarea>
-                </div>
-              </div>
               <!-- div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
@@ -173,6 +345,7 @@
                   </div>
                 </div>
               </div -->
+              </fieldset>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                   <button type="submit" class="btn btn-default" ng-click="editionButtonClicked()" ng-disabled="!selectedGame">{{editionButtonTitle}}</button>
