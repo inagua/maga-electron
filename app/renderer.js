@@ -50,23 +50,38 @@ angularApp.controller('MagaMain', function ($scope) {
         })
     }
 
-    // Known STATUS
+    // Known Fields VALUES
     //
-    var setupKnownFieldValues = function () {
+    var setupKnownFieldsValues = function () {
         if ($scope.games) {
             var statusMap = {};
             var agileMap = {};
             $scope.games.forEach(function (game) {
                 statusMap[game.status] = "ok";
-                if (game.agile) {
-                    game.agile.forEach(function (topic) {
+                if (game.agileTopics) {
+                    game.agileTopics.forEach(function (topic) {
                         agileMap[topic] = "ok";
                     });
                 }
             });
             $scope.knownStatus = "" + Object.keys(statusMap).sort();
-            $scope.knownAgileTopics = "" + Object.keys(agileMap).sort();
+            $scope.knownAgileTopics = Object.keys(agileMap).sort();
         }
+    };
+    var setupAvailableAgileTopics = function () {
+        if ($scope.knownAgileTopics && $scope.selectedGame && $scope.selectedGame.agileTopics && $scope.selectedGame.agileTopics.length > 0) {
+            $scope.availableAgileTopics = [];
+            $scope.knownAgileTopics.forEach(function (a) {
+                if ($scope.selectedGame.agileTopics.indexOf(a) == -1) {
+                    $scope.availableAgileTopics.push(a);
+                }
+            });
+        } else {
+            $scope.availableAgileTopics = $scope.knownAgileTopics;
+        }
+    };
+    var setupAvailableFieldsValues = function () {
+        setupAvailableAgileTopics();
     };
 
     // LOAD JSON
@@ -75,7 +90,7 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.allGames = JSON.parse(fs.readFileSync($scope.jsonURL,'utf8'));
         $scope.games = $scope.allGames;
         $scope.selectedGame = undefined;
-        setupKnownFieldValues();
+        setupKnownFieldsValues();
         clearFilterFields();
     };
     loadJson();
@@ -88,6 +103,7 @@ angularApp.controller('MagaMain', function ($scope) {
         } else {
             $scope.selectedGame = game;
         }
+        setupAvailableFieldsValues();
 
         $scope.editing = false;
         updateEditionButton();
@@ -102,7 +118,7 @@ angularApp.controller('MagaMain', function ($scope) {
         if ($scope.selectedGame) {
             if ($scope.editing) { // SAVE !!
                 $scope.selectedGame.updated = new Date();
-                setupKnownFieldValues();
+                setupKnownFieldsValues();
                 sortGames();
             }
             $scope.editing = !$scope.editing;
@@ -201,19 +217,30 @@ angularApp.controller('MagaMain', function ($scope) {
 
     // AGILE TOPICS
     //
+    var pushAgileTopic = function (topic) {
+        if (topic && topic.trim().length > 0) {
+            if (!$scope.selectedGame.agileTopics) {
+                $scope.selectedGame.agileTopics = [];
+            }
+            if ($scope.selectedGame.agileTopics.indexOf(topic) == -1) {
+                $scope.selectedGame.agileTopics.push(topic);
+                $scope.selectedGame.agileTopics.sort();
+                setupAvailableAgileTopics();
+            }
+        }
+    };
     $scope.removeAgileTopic = function (topic) {
-        var i = $scope.selectedGame.agile.indexOf(topic);
+        var i = $scope.selectedGame.agileTopics.indexOf(topic);
         if (i > -1) {
-            $scope.selectedGame.agile.splice(i, 1);
+            $scope.selectedGame.agileTopics.splice(i, 1);
+            setupAvailableAgileTopics();
         }
     };
     $scope.addAgileTopic = function () {
-        if ($scope.newAgileTopic && $scope.newAgileTopic.trim().length > 0) {
-            if (!$scope.selectedGame.agile) {
-                $scope.selectedGame.agile = [];
-            }
-            $scope.selectedGame.agile.push($scope.newAgileTopic);
-        }
+        pushAgileTopic($scope.newAgileTopic);
         $scope.newAgileTopic = undefined;
+    };
+    $scope.useAgileTopic = function (topic) {
+        pushAgileTopic(topic);
     };
 });

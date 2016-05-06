@@ -371,16 +371,15 @@
                 <!-- AGILE -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Agile</label>
-                  <div class="col-sm-10" title="{{knownAgileTopics}}">
+                  <div class="col-sm-10">
 
                     <ul class="form-control-static list-inline" ng-hide="editing">
-
-                      <li class="label label-info" ng-repeat="agileTopic in selectedGame.agile" style="margin-left: 5px;">{{agileTopic}}</li>
+                      <li class="label label-info" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">{{agileTopic}}</li>
                     </ul>
 
                     <span ng-show="editing">
                       <ul class="form-control-static list-inline">
-                        <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agile" style="margin-left: 5px;">
+                        <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">
                           <a ng-click="removeAgileTopic(agileTopic)" href="" style="color: white;">{{agileTopic}} (x)</a>
                         </li>
                       </ul>
@@ -390,6 +389,11 @@
                           <button class = "btn btn-success" type="button" ng-click="addAgileTopic()">Add</button>
                         </span>
                       </div><!-- /input-group -->
+                      <ul class="form-control-static list-inline">
+                        <li class="label label-success" ng-repeat="known in availableAgileTopics" style="margin-left: 5px;">
+                          <a ng-click="useAgileTopic(known)" href="" style="color: white;">{{known}} (+)</a>
+                        </li>
+                      </ul>
                     </span>
 
                   </div>
