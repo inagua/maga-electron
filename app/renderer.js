@@ -29,6 +29,7 @@ angularApp.controller('MagaMain', function ($scope) {
     };
     loadJson();
     $scope.editing = false;
+    $scope.showNotYetImplemented = false;
 
     $scope.selectGame = function(game){
         if ($scope.selectedGame == game) {
