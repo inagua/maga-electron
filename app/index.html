@@ -20,7 +20,7 @@
     <!--<link rel="apple-touch-icon" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72x72.png">-->
     <!--<link rel="apple-touch-icon" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114x114.png">-->
 
-    <link href="resources/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+    <link href="resources/font-awesome-4.6.1/css/font-awesome.min.css" type="text/css" rel="stylesheet">
 
     <!-- CSS code from Bootply.com editor -->
 
@@ -173,7 +173,7 @@
 
                <span class = "input-group-btn">
                  <!-- <i class="fa fa-times"></i><i class="glyphicon glyphicon-remove-circle"></i> -->
-                  <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()">X</button>
+                  <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()"><i class="fa fa-times-circle fa-lg"></i></button>
                </span>
 
             </div><!-- /input-group -->
@@ -390,7 +390,7 @@
                     <span ng-show="editing">
                       <ul class="form-control-static list-inline">
                         <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">
-                          <a ng-click="removeAgileTopic(agileTopic)" href="" style="color: white;">{{agileTopic}} (x)</a>
+                          <a ng-click="removeAgileTopic(agileTopic)" href="" style="color: white;"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{agileTopic}}</a>
                         </li>
                       </ul>
                       <div class = "input-group">
@@ -401,7 +401,7 @@
                       </div><!-- /input-group -->
                       <ul class="form-control-static list-inline">
                         <li class="label label-success" ng-repeat="known in availableAgileTopics" style="margin-left: 5px;">
-                          <a ng-click="useAgileTopic(known)" href="" style="color: white;">{{known}} (+)</a>
+                          <a ng-click="useAgileTopic(known)" href="" style="color: white;"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
                         </li>
                       </ul>
                     </span>
@@ -490,7 +490,7 @@
                         <li class="" ng-repeat="r in selectedGame.resources" title="{{r.details + '\n(' + r.url + ')'}}">
                           <a href="" ng-click="gameClicked(r.url)" target="_blank">{{r.name}}</a>
                           <span ng-show="r.type">&nbsp;({{r.type}})</span>
-                          &nbsp;<button class = "btn btn-danger btn-xs" type="button" ng-click="removeResource(r)">(x)</button>
+                          &nbsp;<button class = "btn btn-danger btn-xs" type="button" ng-click="removeResource(r)"><i class="fa fa-times-circle fa-lg"></i></button>
                         </li>
                       </ul>
 

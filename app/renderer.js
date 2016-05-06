@@ -20,7 +20,7 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.gameFilterPattern = undefined;
         $scope.gameFilterFullSearch = false;
     };
-    $scope.jsonURL = "maga-light.json";
+    $scope.jsonURL = "maga.json";
     $scope.editing = false;
     $scope.showNotYetImplemented = false;
 
