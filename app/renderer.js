@@ -139,4 +139,15 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.$watch("gameFilterPattern", filterUpdated);
     $scope.$watch("gameFilterFullSearch", filterUpdated);
     $scope.clearFilterButtonClicked();
+
+    // REMOVE
+    //
+    $scope.removeButtonClicked = function() {
+        var index = $scope.allGames.indexOf($scope.selectedGame);
+        if (index > -1) {
+            $scope.allGames.splice(index, 1);
+            $scope.selectedGame = undefined;
+            filterUpdated();
+        }
+    };
 });

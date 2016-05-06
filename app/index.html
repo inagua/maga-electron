@@ -441,7 +441,8 @@
               </fieldset>
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-info" ng-click="editionButtonClicked()" ng-disabled="!selectedGame">{{editionButtonTitle}}</button>
+                  <button type="submit" class="btn btn-info" ng-click="editionButtonClicked()" >{{editionButtonTitle}}</button>
+                  <button type="submit" class="btn btn-danger" ng-click="removeButtonClicked()" ng-show="editing">Remove</button>
                 </div>
               </div>
             </form>
