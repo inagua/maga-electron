@@ -21,13 +21,6 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.gameFilterFullSearch = false;
     };
     $scope.jsonURL = "maga-light.json";
-    var loadJson = function () {
-        $scope.allGames = JSON.parse(fs.readFileSync($scope.jsonURL,'utf8'));
-        $scope.games = $scope.allGames;
-        $scope.selectedGame = undefined;
-        clearFilterFields();
-    };
-    loadJson();
     $scope.editing = false;
     $scope.showNotYetImplemented = false;
 
@@ -57,6 +50,36 @@ angularApp.controller('MagaMain', function ($scope) {
         })
     }
 
+    // Known STATUS
+    //
+    var setupKnownFieldValues = function () {
+        if ($scope.games) {
+            var statusMap = {};
+            var agileMap = {};
+            $scope.games.forEach(function (game) {
+                statusMap[game.status] = "ok";
+                if (game.agile) {
+                    game.agile.forEach(function (topic) {
+                        agileMap[topic] = "ok";
+                    });
+                }
+            });
+            $scope.knownStatus = "" + Object.keys(statusMap).sort();
+            $scope.knownAgileTopics = "" + Object.keys(agileMap).sort();
+        }
+    };
+
+    // LOAD JSON
+    //
+    var loadJson = function () {
+        $scope.allGames = JSON.parse(fs.readFileSync($scope.jsonURL,'utf8'));
+        $scope.games = $scope.allGames;
+        $scope.selectedGame = undefined;
+        setupKnownFieldValues();
+        clearFilterFields();
+    };
+    loadJson();
+
     // UI CALLBACKS
     //
     $scope.selectGame = function(game){
@@ -77,8 +100,9 @@ angularApp.controller('MagaMain', function ($scope) {
 
     $scope.editionButtonClicked = function() {
         if ($scope.selectedGame) {
-            if ($scope.editing) {
+            if ($scope.editing) { // SAVE !!
                 $scope.selectedGame.updated = new Date();
+                setupKnownFieldValues();
                 sortGames();
             }
             $scope.editing = !$scope.editing;
@@ -118,19 +142,6 @@ angularApp.controller('MagaMain', function ($scope) {
         }
     };
     updateEditionButton();
-
-    // Known STATUS
-    //
-    var setupKnownStatus = function () {
-        if ($scope.games) {
-            var statusMap = {};
-            $scope.games.forEach(function (g) {
-                statusMap[g.status] = "ok";
-            });
-            $scope.knownStatus = "" + Object.keys(statusMap).sort();
-        }
-    };
-    setupKnownStatus();
 
     // Search
     //
@@ -178,13 +189,31 @@ angularApp.controller('MagaMain', function ($scope) {
         if ($scope.selectedGame) {
             $scope.selectedGame.gameId = $scope.selectedGame.name.toLowerCase().replace(/ /g, '-');
         }
-    }
+    };
 
-    // GENERATE ID
+    // GENERATE SORT NAME
     //
     $scope.generateSortNameClicked = function () {
         if ($scope.selectedGame) {
             $scope.selectedGame.nameToSort = $scope.selectedGame.name;
         }
-    }
+    };
+
+    // AGILE TOPICS
+    //
+    $scope.removeAgileTopic = function (topic) {
+        var i = $scope.selectedGame.agile.indexOf(topic);
+        if (i > -1) {
+            $scope.selectedGame.agile.splice(i, 1);
+        }
+    };
+    $scope.addAgileTopic = function () {
+        if ($scope.newAgileTopic && $scope.newAgileTopic.trim().length > 0) {
+            if (!$scope.selectedGame.agile) {
+                $scope.selectedGame.agile = [];
+            }
+            $scope.selectedGame.agile.push($scope.newAgileTopic);
+        }
+        $scope.newAgileTopic = undefined;
+    };
 });
