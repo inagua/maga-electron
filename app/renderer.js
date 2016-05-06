@@ -17,7 +17,8 @@ var BUTTON_EDITION_VALIDATE = "Validate";
 angularApp.controller('MagaMain', function ($scope) {
 
     var path = "maga-light.json";
-    $scope.games = JSON.parse(fs.readFileSync(path,'utf8'));
+    $scope.allGames = JSON.parse(fs.readFileSync(path,'utf8'));
+    $scope.games = $scope.allGames;
     $scope.selectedGame = undefined;
     $scope.editing = false;
 
@@ -65,6 +66,8 @@ angularApp.controller('MagaMain', function ($scope) {
         });
     };
 
+    // EDITION button
+    //
     var updateEditionButton = function () {
         if ($scope.editing && $scope.selectedGame) {
             $scope.editionButtonTitle = BUTTON_EDITION_VALIDATE;
@@ -74,6 +77,8 @@ angularApp.controller('MagaMain', function ($scope) {
     };
     updateEditionButton();
 
+    // Known STATUS
+    //
     var setupKnownStatus = function () {
         if ($scope.games) {
             var statusMap = {};
@@ -84,4 +89,29 @@ angularApp.controller('MagaMain', function ($scope) {
         }
     }
     setupKnownStatus();
+
+    // Search
+    //
+    $scope.gameFilterPattern = undefined;
+    $scope.gameFilterFullSearch = false;
+    var filterUpdated = function (newValue, oldValue, scope) {
+        var pattern = $scope.gameFilterPattern.toUpperCase();
+        if (!pattern || pattern.length == 0) {
+            $scope.games = $scope.allGames;
+        } else {
+            $scope.games = [];
+            $scope.allGames.forEach(function (g) {
+                var place = g.name;
+                if ($scope.gameFilterFullSearch) {
+                    place = JSON.stringify(g);
+                }
+                place = place.toUpperCase();
+                if (place.indexOf(pattern) > -1) {
+                    $scope.games.push(g);
+                }
+            });
+        }
+    };
+    $scope.$watch("gameFilterPattern", filterUpdated);
+    $scope.$watch("gameFilterFullSearch", filterUpdated);
 });
