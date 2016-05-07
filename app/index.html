@@ -232,26 +232,34 @@
 
               <fieldset ng-disabled="!editing">
 
-                <!-- NAME -->
-                <div class="form-group">
-                  <label for="gameName" class="col-sm-2 control-label">Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gameName" placeholder="Name" ng-model="selectedGame.name">
-                  </div>
-                </div>
 
-                <!-- SORT NAME -->
+                <!-- SYNOPSIS -->
                 <div class="form-group">
-                  <label for="gameNameToSort" class="col-sm-2 control-label">Sort Name</label>
+                  <label for="gameSynopsis" class="col-sm-2 control-label">Synopsis</label>
                   <div class="col-sm-10">
-                    <div class = "input-group" >
-                      <input type="text" class="form-control" id="gameNameToSort" placeholder="Sort Name" ng-model="selectedGame.nameToSort">
+                    <div class="input-group">
+                      <textarea class="form-control" id="gameSynopsis" rows="3" placeholder="Synopsis" ng-model="selectedGame.synopsis"></textarea>
                       <span class = "input-group-btn">
-                        <button class = "btn btn-primary" type="button" ng-click="generateSortNameClicked()">Generate</button>
+                        <button class = "btn btn-danger" type="button" ng-click="selectedGame.synopsis=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
                       </span>
                     </div>
                   </div>
                 </div>
+
+
+                <!-- NAME -->
+                <div class="form-group">
+                  <label for="gameName" class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="gameName" placeholder="Name" ng-model="selectedGame.name">
+                      <span class = "input-group-btn">
+                        <button class = "btn btn-danger" type="button" ng-click="selectedGame.name=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
 
                 <!-- ID -->
                 <div class="form-group">
@@ -262,10 +270,41 @@
                       <input type="text" class="form-control" id="gameID" placeholder="ID" ng-model="selectedGame.gameId">
                       <span class = "input-group-btn">
                         <button class = "btn btn-primary" type="button" ng-click="generateIdClicked()">Generate</button>
+                        <button class = "btn btn-danger" type="button" ng-click="selectedGame.gameId=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
                       </span>
                     </div>
                   </div>
                 </div>
+
+
+                <!-- SORT NAME -->
+                <div class="form-group">
+                  <label for="gameNameToSort" class="col-sm-2 control-label">Sort Name</label>
+                  <div class="col-sm-10">
+                    <div class = "input-group" >
+                      <input type="text" class="form-control" id="gameNameToSort" placeholder="Sort Name" ng-model="selectedGame.nameToSort">
+                      <span class = "input-group-btn">
+                        <button class = "btn btn-primary" type="button" ng-click="generateSortNameClicked()">Generate</button>
+                        <button class = "btn btn-danger" type="button" ng-click="selectedGame.nameToSort=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!-- NAME VO -->
+                <div class="form-group">
+                  <label for="gameNameVO" class="col-sm-2 control-label">Name VO</label>
+                  <div class="col-sm-10">
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="gameNameVO" placeholder="Name VO" ng-model="selectedGame.nameVo">
+                      <span class = "input-group-btn">
+                        <button class = "btn btn-danger" type="button" ng-click="selectedGame.nameVo=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
 
                 <!-- UPDATED -->
                 <div class="form-group">
@@ -274,6 +313,7 @@
                     <p class="form-control-static">{{selectedGame.updated}}</p>
                   </div>
                 </div>
+
 
                 <!-- STATUS -->
                 <div class="form-group">
@@ -288,13 +328,15 @@
                   </div>
                 </div>
 
-                <!-- NAME VO -->
+
+                <!-- AUTHOR -->
                 <div class="form-group">
-                  <label for="gameNameVO" class="col-sm-2 control-label">Name VO</label>
+                  <label for="gameAuthor" class="col-sm-2 control-label">Author</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gameNameVO" placeholder="Name VO" ng-model="selectedGame.nameVo">
+                    <input type="text" class="form-control" id="gameAuthor" placeholder="Author" ng-model="selectedGame.author">
                   </div>
                 </div>
+
 
                 <!-- URL -->
                 <div class="form-group">
@@ -305,13 +347,16 @@
                   </div>
                 </div>
 
-                <!-- SYNOPSIS -->
+
+                <!-- SOURCE -->
                 <div class="form-group">
-                  <label for="gameSynopsis" class="col-sm-2 control-label">Synopsis</label>
+                  <label for="gameSource" class="col-sm-2 control-label">Source</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameSynopsis" rows="2" placeholder="Synopsis" ng-model="selectedGame.synopsis"></textarea>
+                    <input ng-show="editing" type="text" class="form-control" id="gameSource" placeholder="Source" ng-model="selectedGame.source">
+                    <p ng-hide="editing" class="form-control-static"><a href="" ng-click="gameClicked(selectedGame.source)" target="_blank">{{selectedGame.source}}</a></p>
                   </div>
                 </div>
+
 
                 <!-- DETAILS -->
                 <div class="form-group">
@@ -320,6 +365,7 @@
                     <textarea class="form-control" id="gameDetails" rows="3" placeholder="Details" ng-model="selectedGame.details"></textarea>
                   </div>
                 </div>
+
 
                 <!-- GOALS -->
                 <div class="form-group">
@@ -356,23 +402,6 @@
                         <i class="fa fa-heart-o" title="{{i}}" ng-show="!selectedGame.rating||selectedGame.rating<i"></i>
                       </span>
                     </p>
-                  </div>
-                </div>
-
-                <!-- AUTHOR -->
-                <div class="form-group">
-                  <label for="gameAuthor" class="col-sm-2 control-label">Author</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gameAuthor" placeholder="Author" ng-model="selectedGame.author">
-                  </div>
-                </div>
-
-                <!-- SOURCE -->
-                <div class="form-group">
-                  <label for="gameSource" class="col-sm-2 control-label">Source</label>
-                  <div class="col-sm-10">
-                    <input ng-show="editing" type="text" class="form-control" id="gameSource" placeholder="Source" ng-model="selectedGame.source">
-                    <p ng-hide="editing" class="form-control-static"><a href="" ng-click="gameClicked(selectedGame.source)" target="_blank">{{selectedGame.source}}</a></p>
                   </div>
                 </div>
 
