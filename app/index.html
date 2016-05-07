@@ -47,6 +47,11 @@
         border-bottom-width:1px;
       }
 
+      a.tag {
+        color: white;
+        text-decoration: none;
+      }
+
       /* collapsed sidebar styles */
       @media screen and (max-width: 767px) {
         .row-offcanvas {
@@ -276,7 +281,7 @@
                     <input type="text" class="form-control" id="gameStatus" placeholder="Status: {{knownStatus}}" ng-model="selectedGame.status" title="{{knownStatus}}">
                     <ul class="form-control-static list-inline" ng-show="editing">
                       <li class="label label-success" ng-repeat="s in knownStatus" style="margin-left: 5px;">
-                        <a ng-click="selectedGame.status=s" href="" style="color: white; text-decoration: none;"><i class="fa fa-check-circle fa-1x"></i>&nbsp;&nbsp;{{s}}&nbsp;</a>
+                        <a class="tag" ng-click="selectedGame.status=s" href=""><i class="fa fa-check-circle fa-1x"></i>&nbsp;&nbsp;{{s}}&nbsp;</a>
                       </li>
                     </ul>
                   </div>
@@ -407,18 +412,18 @@
                     <span ng-show="editing">
                       <ul class="form-control-static list-inline">
                         <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">
-                          <a ng-click="removeAgileTopic(agileTopic)" href="" style="color: white;"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{agileTopic}}</a>
+                          <a ng-click="removeAgileTopic(agileTopic)" href="" class="tag"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{agileTopic}}</a>
                         </li>
                       </ul>
                       <div class = "input-group">
                         <input type="text" class="form-control" placeholder="New Agile Topic" ng-model="newAgileTopic">
                         <span class = "input-group-btn">
-                          <button class = "btn btn-success" type="button" ng-click="addAgileTopic()">Add</button>
+                          <button class = "btn btn-success" type="button" ng-click="addAgileTopic()"><i class="fa fa-plus-circle fa-lg"></i></button>
                         </span>
                       </div><!-- /input-group -->
                       <ul class="form-control-static list-inline">
                         <li class="label label-success" ng-repeat="known in availableAgileTopics" style="margin-left: 5px;">
-                          <a ng-click="useAgileTopic(known)" href="" style="color: white;"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
+                          <a ng-click="useAgileTopic(known)" href="" class="tag"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
                         </li>
                       </ul>
                     </span>
@@ -474,13 +479,36 @@
                   </div>
                 </div>
 
+
                 <!-- TAGS -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gameTags" class="col-sm-2 control-label">Tags</label>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Tags</label>
                   <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
+                    <ul class="form-control-static list-inline" ng-hide="editing">
+                      <li class="label label-info" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px;">{{tag}}</li>
+                    </ul>
+
+                    <span ng-show="editing">
+                      <ul class="form-control-static list-inline">
+                        <li class="label label-danger" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px;">
+                          <a ng-click="removeTag(tag)" href="" class="tag"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{tag}}</a>
+                        </li>
+                      </ul>
+                      <div class = "input-group">
+                        <input type="text" class="form-control" placeholder="New tag" ng-model="newTag">
+                        <span class = "input-group-btn">
+                          <button class = "btn btn-success" type="button" ng-click="addTag()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                        </span>
+                      </div>
+                      <ul class="form-control-static list-inline">
+                        <li class="label label-success" ng-repeat="known in availableTags" style="margin-left: 5px;">
+                          <a ng-click="useTag(known)" href="" class="tag"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
+                        </li>
+                      </ul>
+                    </span>
                   </div>
                 </div>
+
 
                 <!-- PERFORMANCES -->
                 <div class="form-group" ng-show="showNotYetImplemented">

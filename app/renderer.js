@@ -56,6 +56,7 @@ angularApp.controller('MagaMain', function ($scope) {
         if ($scope.games) {
             var statusMap = {};
             var agileMap = {};
+            var tagsMap = {};
             $scope.games.forEach(function (game) {
                 statusMap[game.status] = "ok";
                 if (game.agileTopics) {
@@ -63,9 +64,15 @@ angularApp.controller('MagaMain', function ($scope) {
                         agileMap[topic] = "ok";
                     });
                 }
+                if (game.tags) {
+                    game.tags.forEach(function (tag) {
+                        tagsMap[tag] = "ok";
+                    });
+                }
             });
             $scope.knownStatus = Object.keys(statusMap).sort();
             $scope.knownAgileTopics = Object.keys(agileMap).sort();
+            $scope.knownTags = Object.keys(tagsMap).sort();
         }
     };
     var setupAvailableAgileTopics = function () {
@@ -80,8 +87,21 @@ angularApp.controller('MagaMain', function ($scope) {
             $scope.availableAgileTopics = $scope.knownAgileTopics;
         }
     };
+    var setupAvailableTags = function () {
+        if ($scope.knownTags && $scope.selectedGame && $scope.selectedGame.tags && $scope.selectedGame.tags.length > 0) {
+            $scope.availableTags = [];
+            $scope.knownTags.forEach(function (a) {
+                if ($scope.selectedGame.tags.indexOf(a) == -1) {
+                    $scope.availableTags.push(a);
+                }
+            });
+        } else {
+            $scope.availableTags = $scope.knownTags;
+        }
+    };
     var setupAvailableFieldsValues = function () {
         setupAvailableAgileTopics();
+        setupAvailableTags();
     };
 
     // LOAD JSON
@@ -216,7 +236,7 @@ angularApp.controller('MagaMain', function ($scope) {
         }
     };
 
-    // AGILE TOPICS
+    // FIELD: AGILE TOPICS
     //
     var pushAgileTopic = function (topic) {
         if (topic && topic.trim().length > 0) {
@@ -243,6 +263,36 @@ angularApp.controller('MagaMain', function ($scope) {
     };
     $scope.useAgileTopic = function (topic) {
         pushAgileTopic(topic);
+    };
+
+
+    // FIELD: TAGS
+    //
+    var pushTag = function (tag) {
+        if (tag && tag.trim().length > 0) {
+            if (!$scope.selectedGame.tags) {
+                $scope.selectedGame.tags = [];
+            }
+            if ($scope.selectedGame.tags.indexOf(tag) == -1) {
+                $scope.selectedGame.tags.push(tag);
+                $scope.selectedGame.tags.sort();
+                setupAvailableTags();
+            }
+        }
+    };
+    $scope.removeTag = function (tag) {
+        var i = $scope.selectedGame.tags.indexOf(tag);
+        if (i > -1) {
+            $scope.selectedGame.tags.splice(i, 1);
+            setupAvailableTags();
+        }
+    };
+    $scope.addTag = function () {
+        pushTag($scope.newTag);
+        $scope.newTag = undefined;
+    };
+    $scope.useTag = function (tag) {
+        pushTag(tag);
     };
 
 
