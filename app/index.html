@@ -199,6 +199,7 @@
             <h2>{{games.length}}/{{allGames.length}} Games</h2>
 
             <ul class="nav">
+              <li><a ng-click="selectGame(newGame)" href="#">&lt;&lt; New Game >></a></li>
               <!--<li class="active"><a href="#">Home</a></li>-->
               <!--<li ng-repeat="item in data"><a ng-click="setSelectedItem(item)" href="#">{{item.title}}</a></li>-->
               <li ng-repeat="game in games"><a ng-click="selectGame(game)" href="#">{{game.nameToSort || game.name}}</a></li>

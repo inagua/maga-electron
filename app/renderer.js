@@ -23,6 +23,8 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.jsonURL = "/Users/jacques/Dropbox/-data/data/maga/maga.json";
     $scope.editing = false;
     $scope.showNotYetImplemented = false;
+    var createGame = function() { return { "status":"creating" }; };
+    $scope.newGame = createGame();
 
 
     // Search
@@ -58,7 +60,9 @@ angularApp.controller('MagaMain', function ($scope) {
             var agileMap = {};
             var tagsMap = {};
             $scope.games.forEach(function (game) {
-                statusMap[game.status] = "ok";
+                if (game.status) {
+                    statusMap[game.status] = "ok";
+                }
                 if (game.agileTopics) {
                     game.agileTopics.forEach(function (topic) {
                         agileMap[topic] = "ok";
@@ -126,7 +130,7 @@ angularApp.controller('MagaMain', function ($scope) {
         }
         setupAvailableFieldsValues();
 
-        $scope.editing = false;
+        $scope.editing = (game == $scope.newGame);
         updateEditionButton();
     };
 
@@ -138,6 +142,10 @@ angularApp.controller('MagaMain', function ($scope) {
     $scope.editionButtonClicked = function() {
         if ($scope.selectedGame) {
             if ($scope.editing) { // SAVE !!
+                if ($scope.selectedGame == $scope.newGame) {
+                    $scope.allGames.push($scope.newGame);
+                    $scope.newGame = createGame();
+                }
                 $scope.selectedGame.updated = new Date();
                 setupKnownFieldsValues();
                 sortGames();
