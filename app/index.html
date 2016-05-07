@@ -374,6 +374,7 @@
                   </div>
                 </div>
 
+
                 <!-- TYPE -->
                 <div class="form-group">
                   <label for="gameType" class="col-sm-2 control-label">Type</label>
@@ -381,6 +382,7 @@
                     <input type="text" class="form-control" id="gameType" placeholder="Type" ng-model="selectedGame.type">
                   </div>
                 </div>
+
 
                 <!-- RATING -->
                 <div class="form-group">
@@ -405,12 +407,22 @@
                 </div>
 
                 <!-- DURATION -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gameDuration" class="col-sm-2 control-label">Duration</label>
-                  <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" title="Duration">Minutes (?)</label>
+                  <div class="col-sm-5">
+                    <div class = "input-group" title="Minimal duration (minutes)">
+                      <span class = "input-group-addon">Minimum</span>
+                      <input type="text" class="form-control" placeholder="Minimal duration (minutes)" ng-model="selectedGame.minutes.min">
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class = "input-group" title="Maximal duration (minutes)">
+                      <span class = "input-group-addon">Maximum</span>
+                      <input type="text" class="form-control" placeholder="Maximal duration (minutes)" ng-model="selectedGame.minutes.max">
+                    </div>
                   </div>
                 </div>
+
 
                 <!-- POPULATION -->
                 <div class="form-group">
