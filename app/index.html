@@ -157,16 +157,14 @@
         <div class="row" style="margin-top: 10px;" >
           <div class = "col-lg-12">
             <div class = "input-group">
-              <input type="text" class="form-control" placeholder="JSON File Path" ng-model="jsonURL" title="{{jsonURL}}">
+              <input type="text" class="form-control" id="urlField" placeholder="JSON File Path" ng-model="jsonURL" title="{{jsonURL}}">
 
                <span class = "input-group-btn">
                   <button class = "btn btn-primary" type="button" ng-click="loadButtonClicked()">Load</button>
-                  <button class = "btn btn-danger" type="button" ng-click="saveButtonClicked()">Save</button>
+                  <button class = "btn" ng-class="{'btn-success':noNeedToSave, 'btn-warning':!noNeedToSave}" type="button" ng-click="saveButtonClicked()">Save</button>
                </span>
-
-            </div><!-- /input-group -->
-          </div><!-- /.col-lg-6 -->
-
+            </div>
+          </div>
         </div>
 
         <div class="row row-offcanvas row-offcanvas-left">

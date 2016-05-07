@@ -22,6 +22,7 @@ angularApp.controller('MagaMain', function ($scope) {
     };
     $scope.jsonURL = "/Users/jacques/Dropbox/-data/data/maga/maga.json";
     $scope.editing = false;
+    $scope.noNeedToSave = true;
     $scope.showNotYetImplemented = false;
     var createGame = function() { return { "status":"creating" }; };
     $scope.newGame = createGame();
@@ -140,6 +141,7 @@ angularApp.controller('MagaMain', function ($scope) {
     };
 
     $scope.editionButtonClicked = function() {
+        $scope.noNeedToSave = false;
         if ($scope.selectedGame) {
             if ($scope.editing) { // SAVE !!
                 if ($scope.selectedGame == $scope.newGame) {
@@ -158,6 +160,7 @@ angularApp.controller('MagaMain', function ($scope) {
     };
 
     $scope.loadButtonClicked = function() {
+        $scope.noNeedToSave = true;
         loadJson();
     };
 
@@ -173,6 +176,10 @@ angularApp.controller('MagaMain', function ($scope) {
             fs.writeFile($scope.jsonURL, json, function (err) {
                 if (err) return console.log(err);
                 console.log('JSON saved!');
+                $scope.$apply(function(){
+                    $scope.noNeedToSave = true;
+                    }
+                );
             });
         });
     };
