@@ -7,6 +7,8 @@
 
 // var fs = require('fs');
 var fs = require('fs.extra');
+var moment = require('moment'); // http://momentjs.com/docs/#/displaying/
+moment.locale('fr');
 
 const shell = require('electron').shell;
 
@@ -120,6 +122,16 @@ angularApp.controller('MagaMain', function ($scope) {
         sortGames();
     };
     loadJson();
+
+    // UTILS
+    //
+    $scope.formatFullDate = function(date) {
+        if (date) {
+            // return moment(new Date(date)).format("dddd, MMMM Do YYYY, HH:mm:ss"); // EN
+            return moment(new Date(date)).format("dddd Do MMMM YYYY - HH:mm:ss"); // FR
+        }
+        return "-";
+    };
 
     // UI CALLBACKS
     //
