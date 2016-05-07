@@ -220,7 +220,8 @@
                 <div class="col-sm-offset-2 col-sm-10">
                   <div class="checkbox">
                     <button type="submit" class="btn btn-info" ng-click="editionButtonClicked()" >{{editionButtonTitle}}</button>
-                    <button type="submit" class="btn btn-danger" ng-click="removeButtonClicked()" ng-show="editing">Remove</button>
+                    <button type="submit" class="btn btn-danger" ng-click="removeButtonClicked()" ng-show="editing && selectedGame!=newGame">Remove</button>
+                    <button type="submit" class="btn btn-danger" ng-click="clearNewGameClicked()" ng-show="editing && selectedGame==newGame">Clear this new Game</button>
                     <label>
                       <input type="checkbox" ng-model="showNotYetImplemented"> Show not yet implemented?
                     </label>

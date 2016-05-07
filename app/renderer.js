@@ -144,6 +144,9 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.noNeedToSave = false;
         if ($scope.selectedGame) {
             if ($scope.editing) { // SAVE !!
+                if ($scope.selectedGame.name.trim().length == 0) {
+                    return ;
+                }
                 if ($scope.selectedGame == $scope.newGame) {
                     $scope.allGames.push($scope.newGame);
                     $scope.newGame = createGame();
@@ -157,6 +160,10 @@ angularApp.controller('MagaMain', function ($scope) {
             $scope.editing = false;
         }
         updateEditionButton();
+    };
+
+    $scope.clearNewGameClicked = function() {
+        $scope.selectedGame = $scope.newGame = createGame();
     };
 
     $scope.loadButtonClicked = function() {
