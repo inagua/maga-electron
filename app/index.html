@@ -513,10 +513,33 @@
                 </div>
 
                 <!-- SEE -->
-                <div class="form-group" ng-show="showNotYetImplemented">
-                  <label for="gameSee" class="col-sm-2 control-label">See</label>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" title="Linked Game Ids">See (?)</label>
                   <div class="col-sm-10">
-                    <p class="form-control-static">### TODO ###</p>
+                    <ul class="form-control-static list-inline" ng-hide="editing">
+                      <li class="label label-info" ng-repeat="see in selectedGame.see" style="margin-left: 5px; cursor: help;" title="{{gameNameForId(see).name}}">{{see}}</li>
+                    </ul>
+
+                    <span ng-show="editing">
+                      <ul class="form-control-static list-inline">
+                        <li class="label label-danger" ng-repeat="see in selectedGame.see" style="margin-left: 5px;" title="'{{gameNameForId(see).name}}' (click to remove)">
+                          <a ng-click="removeSee(see)" href="" class="tag"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{see}}</a>
+                        </li>
+                      </ul>
+                      <fieldset ng-disabled="availableSee.length==0" title="{{availableSee.length==0?'No Game Ids available':'Select a Game to link with'}}">
+                        <div class = "input-group">
+                          <select class="form-control" ng-model="selectedSeeGameId">
+                            <option value="" selected="selected"><i>-- Select a Game to link with --</i></option>
+                            <option ng-repeat="known in availableSee" value="{{known}}">{{gameNameForId(known).name}}</option>
+                          </select>
+                          <span class = "input-group-btn">
+                            <button class="btn btn-success" type="button"
+                                    title="{{availableSee.length==0?'No Game Ids available':(!selectedSeeGameId?'No Game selected':'Click to add the selected Game')}}"
+                                    ng-click="useSee()" ng-disabled="!selectedSeeGameId" ><i class="fa fa-plus-circle fa-lg"></i></button>
+                          </span>
+                        </div>
+                      </fieldset>
+                    </span>
                   </div>
                 </div>
 

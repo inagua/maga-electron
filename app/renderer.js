@@ -59,13 +59,13 @@ angularApp.controller('MagaMain', function ($scope) {
     //
     var setupKnownFieldsValues = function () {
         if ($scope.games) {
+            var idsMap = {};
             var statusMap = {};
             var agileMap = {};
             var tagsMap = {};
             $scope.games.forEach(function (game) {
-                if (game.status) {
-                    statusMap[game.status] = "ok";
-                }
+                if (game.gameId) { idsMap[game.gameId] = "ok"; }
+                if (game.status) { statusMap[game.status] = "ok"; }
                 if (game.agileTopics) {
                     game.agileTopics.forEach(function (topic) {
                         agileMap[topic] = "ok";
@@ -77,6 +77,7 @@ angularApp.controller('MagaMain', function ($scope) {
                     });
                 }
             });
+            $scope.knownSee = Object.keys(idsMap).sort();
             $scope.knownStatus = Object.keys(statusMap).sort();
             $scope.knownAgileTopics = Object.keys(agileMap).sort();
             $scope.knownTags = Object.keys(tagsMap).sort();
@@ -85,30 +86,52 @@ angularApp.controller('MagaMain', function ($scope) {
     var setupAvailableAgileTopics = function () {
         if ($scope.knownAgileTopics && $scope.selectedGame && $scope.selectedGame.agileTopics && $scope.selectedGame.agileTopics.length > 0) {
             $scope.availableAgileTopics = [];
-            $scope.knownAgileTopics.forEach(function (a) {
-                if ($scope.selectedGame.agileTopics.indexOf(a) == -1) {
-                    $scope.availableAgileTopics.push(a);
+            $scope.knownAgileTopics.forEach(function (k) {
+                if ($scope.selectedGame.agileTopics.indexOf(k) == -1) {
+                    $scope.availableAgileTopics.push(k);
                 }
             });
         } else {
             $scope.availableAgileTopics = $scope.knownAgileTopics;
         }
+        $scope.availableAgileTopics.sort();
     };
     var setupAvailableTags = function () {
         if ($scope.knownTags && $scope.selectedGame && $scope.selectedGame.tags && $scope.selectedGame.tags.length > 0) {
             $scope.availableTags = [];
-            $scope.knownTags.forEach(function (a) {
-                if ($scope.selectedGame.tags.indexOf(a) == -1) {
-                    $scope.availableTags.push(a);
+            $scope.knownTags.forEach(function (k) {
+                if ($scope.selectedGame.tags.indexOf(k) == -1) {
+                    $scope.availableTags.push(k);
                 }
             });
         } else {
             $scope.availableTags = $scope.knownTags;
         }
+        $scope.availableTags.sort();
+    };
+    var setupAvailableSee = function () {
+        if ($scope.knownSee && $scope.selectedGame && $scope.selectedGame.see && $scope.selectedGame.see.length > 0) {
+            $scope.availableSee = [];
+            $scope.knownSee.forEach(function (k) {
+                if ($scope.selectedGame.see.indexOf(k) == -1) {
+                    $scope.availableSee.push(k);
+                }
+            });
+        } else {
+            $scope.availableSee = $scope.knownSee;
+        }
+        if ($scope.availableSee && $scope.availableSee.length > 0 && $scope.selectedGame && $scope.selectedGame.gameId) {
+            var i = $scope.availableSee.indexOf($scope.selectedGame.gameId);
+            if (i > -1) {
+                $scope.availableSee.splice(i, 1);
+            }
+        }
+        $scope.availableSee.sort();
     };
     var setupAvailableFieldsValues = function () {
         setupAvailableAgileTopics();
         setupAvailableTags();
+        setupAvailableSee();
     };
 
     // LOAD JSON
@@ -132,10 +155,22 @@ angularApp.controller('MagaMain', function ($scope) {
         }
         return "-";
     };
+    $scope.gameNameForId = function(gameId) {
+        if ($scope.allGames && gameId) {
+            for (var g in $scope.allGames) {
+                var game = $scope.allGames[g];
+                if (gameId == game.gameId) {
+                    return game;
+                }
+            }
+        }
+        return undefined;
+    };
 
     // UI CALLBACKS
     //
     $scope.selectGame = function(game){
+        $scope.selectedSeeId = undefined;
         if ($scope.selectedGame == game) {
             $scope.selectedGame = undefined;
         } else {
@@ -351,4 +386,28 @@ angularApp.controller('MagaMain', function ($scope) {
             $scope.newResourceName = $scope.newResourceDetails = $scope.newResourceType = $scope.newResourceUrl = undefined;
         }
     };
+
+
+    // FIELD: TAGS
+    //
+    $scope.removeSee = function (see) {
+        var i = $scope.selectedGame.see.indexOf(see);
+        if (i > -1) {
+            $scope.selectedGame.see.splice(i, 1);
+            setupAvailableSee();
+        }
+    };
+    $scope.useSee = function () {
+        var see = $scope.selectedSeeGameId;
+        if (see && see.trim().length > 0) {
+            if (!$scope.selectedGame.see) { $scope.selectedGame.see = []; }
+            if ($scope.selectedGame.see.indexOf(see) == -1) {
+                $scope.selectedGame.see.push(see);
+                $scope.selectedGame.see.sort();
+                setupAvailableSee();
+            }
+        }
+        $scope.selectedSeeGameId = undefined;
+    };
+
 });
