@@ -268,7 +268,7 @@
                     <div class = "input-group" > <!-- ng-hide="selectedGame.gameId" -->
                       <input type="text" class="form-control" id="gameID" placeholder="ID" ng-model="selectedGame.gameId">
                       <span class = "input-group-btn">
-                        <button class = "btn btn-primary" type="button" ng-click="generateIdClicked()">Generate</button>
+                        <button class = "btn btn-primary" type="button" ng-click="generateIdClicked()" title="Click to generate from the Name">Generate</button>
                         <button class = "btn btn-danger" type="button" ng-click="selectedGame.gameId=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
                       </span>
                     </div>
@@ -283,7 +283,7 @@
                     <div class = "input-group" >
                       <input type="text" class="form-control" id="gameNameToSort" placeholder="Sort Name" ng-model="selectedGame.nameToSort">
                       <span class = "input-group-btn">
-                        <button class = "btn btn-primary" type="button" ng-click="generateSortNameClicked()">Generate</button>
+                        <button class = "btn btn-primary" type="button" ng-click="generateSortNameClicked()" title="Click to generate from the Name">Generate</button>
                         <button class = "btn btn-danger" type="button" ng-click="selectedGame.nameToSort=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
                       </span>
                     </div>

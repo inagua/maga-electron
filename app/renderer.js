@@ -15,6 +15,11 @@ const shell = require('electron').shell;
 var angularApp = angular.module('MagaApp', []);
 var BUTTON_EDITION_EDIT = "  Edit  ";
 var BUTTON_EDITION_VALIDATE = "Validate";
+var ARTICLES = ['the', 'a', 'le', 'la', 'les', "l'", 'un', 'une', 'des'];
+
+String.prototype.startsWith = function (str) {
+    return !this.indexOf(str);
+};
 
 angularApp.controller('MagaMain', function ($scope) {
 
@@ -299,8 +304,22 @@ angularApp.controller('MagaMain', function ($scope) {
 
     // GENERATE SORT NAME
     //
+    var suffixeFirstWordOf = function(string) {
+        var words = string.split(" ");
+        var first = words[0];
+        words.splice(0, 1);
+        words.push("("+first+")");
+        return words.join(" ");
+    };
     $scope.generateSortNameClicked = function () {
-        if ($scope.selectedGame) {
+        if ($scope.selectedGame && $scope.selectedGame.name && $scope.selectedGame.name.trim().length > 0) {
+            for (var a in ARTICLES) {
+                var article = ARTICLES[a];
+                if ($scope.selectedGame.name.toLowerCase().startsWith(article)) {
+                    $scope.selectedGame.nameToSort = suffixeFirstWordOf($scope.selectedGame.name);
+                    return ;
+                }
+            }
             $scope.selectedGame.nameToSort = $scope.selectedGame.name;
         }
     };
