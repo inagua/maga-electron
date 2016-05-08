@@ -461,10 +461,10 @@
                         <input type="text" class="form-control" placeholder="New Agile Topic" ng-model="newAgileTopic">
                         <span class = "input-group-btn">
                           <button class = "btn btn-danger" type="button" title="Click to clean the text field"
-                                  ng-click="newAgileTopic=undefined" ng-disabled="!newAgileTopic"><i class="fa fa-times-circle fa-lg"></i></button>
+                                  ng-disabled="!newAgileTopic" ng-click="newAgileTopic=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
                           <button class = "btn btn-success" type="button"
                                   title="{{newAgileTopic?'Click to add this new Agile Topic':'Have to write a new Agile Topic'}}"
-                                  ng-click="addAgileTopic()" ng-disabled="!newAgileTopic"><i class="fa fa-plus-circle fa-lg"></i></button>
+                                  ng-disabled="!newAgileTopic" ng-click="addAgileTopic()"><i class="fa fa-plus-circle fa-lg"></i></button>
                         </span>
                       </div><!-- /input-group -->
                       <ul class="form-control-static list-inline">
@@ -560,18 +560,22 @@
 
                     <span ng-show="editing">
                       <ul class="form-control-static list-inline">
-                        <li class="label label-danger" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px;">
+                        <li class="label label-danger" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px;" title="Click to remove this Tag">
                           <a ng-click="removeTag(tag)" href="" class="tag"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{tag}}</a>
                         </li>
                       </ul>
                       <div class = "input-group">
                         <input type="text" class="form-control" placeholder="New tag" ng-model="newTag">
                         <span class = "input-group-btn">
-                          <button class = "btn btn-success" type="button" ng-click="addTag()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                          <button class = "btn btn-danger" type="button" title="Click to clean the text field"
+                                  ng-disabled="!newTag" ng-click="newTag=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
+                          <button class = "btn btn-success" type="button"
+                                  title="{{newTag?'Click to add this new Tag':'Have to write a new Tag'}}"
+                                  ng-disabled="!newTag" ng-click="addTag()"><i class="fa fa-plus-circle fa-lg"></i></button>
                         </span>
                       </div>
                       <ul class="form-control-static list-inline">
-                        <li class="label label-success" ng-repeat="known in availableTags" style="margin-left: 5px;">
+                        <li class="label label-success" ng-repeat="known in availableTags" style="margin-left: 5px;" title="Click to add this existing Tag">
                           <a ng-click="useTag(known)" href="" class="tag"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
                         </li>
                       </ul>
