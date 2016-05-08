@@ -441,6 +441,7 @@
                   </div>
                 </div>
 
+
                 <!-- AGILE -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Agile Topics</label>
@@ -452,18 +453,22 @@
 
                     <span ng-show="editing">
                       <ul class="form-control-static list-inline">
-                        <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">
+                        <li class="label label-danger" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;" title="Click to remove this Agile Topic">
                           <a ng-click="removeAgileTopic(agileTopic)" href="" class="tag"><i class="fa fa-times-circle fa-1x"></i>&nbsp;&nbsp;{{agileTopic}}</a>
                         </li>
                       </ul>
                       <div class = "input-group">
                         <input type="text" class="form-control" placeholder="New Agile Topic" ng-model="newAgileTopic">
                         <span class = "input-group-btn">
-                          <button class = "btn btn-success" type="button" ng-click="addAgileTopic()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                          <button class = "btn btn-danger" type="button" title="Click to clean the text field"
+                                  ng-click="newAgileTopic=undefined" ng-disabled="!newAgileTopic"><i class="fa fa-times-circle fa-lg"></i></button>
+                          <button class = "btn btn-success" type="button"
+                                  title="{{newAgileTopic?'Click to add this new Agile Topic':'Have to write a new Agile Topic'}}"
+                                  ng-click="addAgileTopic()" ng-disabled="!newAgileTopic"><i class="fa fa-plus-circle fa-lg"></i></button>
                         </span>
                       </div><!-- /input-group -->
                       <ul class="form-control-static list-inline">
-                        <li class="label label-success" ng-repeat="known in availableAgileTopics" style="margin-left: 5px;">
+                        <li class="label label-success" ng-repeat="known in availableAgileTopics" style="margin-left: 5px;" title="Click to add this existing Agile Topic">
                           <a ng-click="useAgileTopic(known)" href="" class="tag"><i class="fa fa-plus-circle fa-1x"></i>&nbsp;&nbsp;{{known}}</a>
                         </li>
                       </ul>
@@ -471,6 +476,7 @@
 
                   </div>
                 </div>
+
 
                 <!-- PROFILS -->
                 <div class="form-group" ng-show="showNotYetImplemented">
