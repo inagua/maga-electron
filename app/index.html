@@ -386,7 +386,7 @@
 
                 <!-- STEPS -->
                 <div class="form-group" ng-show="editing||selectedGame.steps">
-                  <label for="gameSteps" class="col-sm-2 control-label">Steps</label>
+                  <label class="col-sm-2 control-label">Steps</label>
                   <div class="col-sm-10">
 
                     <ol class="form-control-static" ng-hide="editing">
@@ -396,8 +396,10 @@
                     <span ng-show="editing">
                       <ol class="form-control-static">
                         <li ng-repeat="step in selectedGame.steps" style="margin-left: 5px;">
-                          <h3><button class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
-                            {{step.name}}</h3>
+                          <h3>
+                            <button class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
+                            {{step.name}}
+                          </h3>
                           <p>{{step.details}}</p>
                         </li>
                       </ol>
@@ -529,11 +531,33 @@
                 </div>
 
 
-                <!-- MATERIAL -->
-                <div class="form-group" ng-show="editing||selectedGame.material">
-                  <label for="gameMaterial" class="col-sm-2 control-label">Material</label>
+                <!-- MATERIALS -->
+                <div class="form-group" ng-show="editing||selectedGame.materials">
+                  <label class="col-sm-2 control-label">Material</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameMaterial" rows="2" placeholder="Material" ng-model="selectedGame.material[0]"></textarea>
+
+                    <ol ng-hide="editing">
+                      <li ng-repeat="material in selectedGame.materials">{{material}}</li>
+                    </ol>
+
+                    <span ng-show="editing">
+                      <ol ng-show="selectedGame.materials && selectedGame.materials.length>0">
+                        <li ng-repeat="material in selectedGame.materials">
+                          <button class="btn btn-danger btn-xs" type="button" title="Click to remove this Material" ng-click="removeMaterial(material)"><i class="fa fa-times-circle"></i></button>
+                          {{material}}
+                        </li>
+                      </ol>
+                      <div class = "input-group">
+                        <input type="text" class="form-control" placeholder="New Material" ng-model="newMaterial">
+                        <span class = "input-group-btn">
+                          <button class = "btn btn-danger" type="button" title="Click to clean the text field"
+                                  ng-disabled="!newMaterial" ng-click="newMaterial=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
+                          <button class = "btn btn-success" type="button"
+                                  title="Click to add this new Material"
+                                  ng-disabled="!newMaterial" ng-click="addMaterial()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                        </span>
+                      </div>
+                    </span>
                   </div>
                 </div>
 

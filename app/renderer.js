@@ -449,4 +449,23 @@ angularApp.controller('MagaMain', function ($scope) {
         $scope.newStepName = $scope.newStepDuration = $scope.newStepDetails = undefined;
     };
 
+
+    // FIELD: MATERIAL
+    //
+    $scope.removeMaterial = function (material) {
+        var i = $scope.selectedGame.materials.indexOf(material);
+        if (i > -1) {
+            $scope.selectedGame.materials.splice(i, 1);
+        }
+    };
+    $scope.addMaterial = function () {
+        if ($scope.newMaterial && $scope.newMaterial.trim().length > 0) {
+            if (!$scope.selectedGame.materials) { $scope.selectedGame.materials = []; }
+            if ($scope.selectedGame.materials.indexOf($scope.newMaterial) == -1) {
+                $scope.selectedGame.materials.push($scope.newMaterial);
+            }
+        }
+        $scope.newMaterial = undefined;
+    };
+
 });
