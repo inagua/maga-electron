@@ -375,6 +375,15 @@
                 </div>
 
 
+                <!-- INSTRUCTIONS -->
+                <div class="form-group" ng-show="editing||selectedGame.instruction" title="{{selectedGame.instruction}}">
+                  <label for="gameInstruction" class="col-sm-2 control-label">Instructions</label>
+                  <div class="col-sm-10">
+                    <textarea class="form-control" id="gameInstruction" rows="5" placeholder="Instructions" ng-model="selectedGame.instruction"></textarea>
+                  </div>
+                </div>
+
+
                 <!-- TYPE -->
                 <div class="form-group" ng-show="editing||selectedGame.type">
                   <label for="gameType" class="col-sm-2 control-label">Type</label>
