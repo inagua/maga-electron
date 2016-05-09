@@ -407,7 +407,7 @@ angularApp.controller('MagaMain', function ($scope) {
     };
 
 
-    // FIELD: TAGS
+    // FIELD: SEE
     //
     $scope.removeSee = function (see) {
         var i = $scope.selectedGame.see.indexOf(see);
@@ -427,6 +427,26 @@ angularApp.controller('MagaMain', function ($scope) {
             }
         }
         $scope.selectedSeeGameId = undefined;
+    };
+
+
+    // FIELD: STEPS
+    //
+    $scope.removeStep = function (step) {
+        var i = $scope.selectedGame.steps.indexOf(step);
+        if (i > -1) {
+            $scope.selectedGame.steps.splice(i, 1);
+        }
+    };
+    $scope.addStep = function () {
+        var newStep = { "name":$scope.newStepName, "duration":$scope.newStepDuration, "details":$scope.newStepDetails };
+        if ($scope.newStepName && $scope.newStepName.trim().length > 0) {
+            if (!$scope.selectedGame.steps) { $scope.selectedGame.steps = []; }
+            if ($scope.selectedGame.steps.indexOf(newStep) == -1) {
+                $scope.selectedGame.steps.push(newStep);
+            }
+        }
+        $scope.newStepName = $scope.newStepDuration = $scope.newStepDetails = undefined;
     };
 
 });

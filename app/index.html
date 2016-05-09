@@ -384,6 +384,39 @@
                 </div>
 
 
+                <!-- STEPS -->
+                <div class="form-group" ng-show="editing||selectedGame.steps">
+                  <label for="gameSteps" class="col-sm-2 control-label">Steps</label>
+                  <div class="col-sm-10">
+
+                    <ol class="form-control-static" ng-hide="editing">
+                      <li ng-repeat="step in selectedGame.steps" style="margin-left: 5px;"><h4>{{step.name}} <sup>{{step.duration}}</sup></h4><p>{{step.details}}</p></li>
+                    </ol>
+
+                    <span ng-show="editing">
+                      <ol class="form-control-static">
+                        <li ng-repeat="step in selectedGame.steps" style="margin-left: 5px;">
+                          <h3><button class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
+                            {{step.name}}</h3>
+                          <p>{{step.details}}</p>
+                        </li>
+                      </ol>
+                      <div class = "input-group">
+                        <input type="text" class="form-control" placeholder="New Step name" ng-model="newStepName">
+                        <input type="text" class="form-control" placeholder="New Step duration" ng-model="newStepDuration">
+                        <textarea class="form-control" rows="3" placeholder="New Step details" ng-model="newStepDetails"></textarea>
+                        <button class = "btn btn-success" type="button"
+                                title="Add new Step"
+                                ng-disabled="!newStepName" ng-click="addStep()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                      </div>
+                    </span>
+
+
+
+                  </div>
+                </div>
+
+
                 <!-- TYPE -->
                 <div class="form-group" ng-show="editing||selectedGame.type">
                   <label for="gameType" class="col-sm-2 control-label">Type</label>
