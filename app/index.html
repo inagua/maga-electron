@@ -389,31 +389,32 @@
                   <label class="col-sm-2 control-label">Steps</label>
                   <div class="col-sm-10">
 
-                    <ol class="form-control-static" ng-hide="editing">
-                      <li ng-repeat="step in selectedGame.steps" style="margin-left: 5px;"><h4>{{step.name}} <sup>{{step.duration}}</sup></h4><p>{{step.details}}</p></li>
-                    </ol>
+                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.steps&&selectedGame.steps.length>0">
+                      <div class="panel panel-default" ng-repeat="step in selectedGame.steps track by $index">
+                        <div class="panel-heading" role="tab" id="heading{{$index}}">
+                          <h4 class="panel-title">
+                            <button ng-show="editing" class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+                              {{step.name}} <sup>{{step.duration}}<span ng-show="step.duration"> min</span></sup>
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$index}}">
+                          <div class="panel-body">
+                            {{step.details}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
                     <span ng-show="editing">
-                      <ol class="form-control-static">
-                        <li ng-repeat="step in selectedGame.steps" style="margin-left: 5px;">
-                          <h3>
-                            <button class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
-                            {{step.name}}
-                          </h3>
-                          <p>{{step.details}}</p>
-                        </li>
-                      </ol>
-                      <div class = "input-group">
-                        <input type="text" class="form-control" placeholder="New Step name" ng-model="newStepName">
-                        <input type="text" class="form-control" placeholder="New Step duration" ng-model="newStepDuration">
-                        <textarea class="form-control" rows="3" placeholder="New Step details" ng-model="newStepDetails"></textarea>
-                        <button class = "btn btn-success" type="button"
-                                title="Add new Step"
-                                ng-disabled="!newStepName" ng-click="addStep()"><i class="fa fa-plus-circle fa-lg"></i></button>
-                      </div>
+                      <input type="text" class="form-control" placeholder="New Step name" ng-model="newStepName">
+                      <input type="text" class="form-control" placeholder="New Step duration (minutes)" ng-model="newStepDuration">
+                      <textarea class="form-control" rows="3" placeholder="New Step details" ng-model="newStepDetails"></textarea>
+                      <button class = "btn btn-success" type="button"
+                              title="Add new Step"
+                              ng-disabled="!newStepName" ng-click="addStep()"><i class="fa fa-plus-circle fa-lg"></i></button>
                     </span>
-
-
 
                   </div>
                 </div>
@@ -730,10 +731,13 @@
   </body>
 
   <script>
-
     // You can also require other files to run in this process
     require('./resources/js/angular-1.5.5.min.js')
     require('./renderer.js')
-
   </script>
+
+  <!-- http://code.jquery.com/jquery-1.9.1.js -->
+  <script src="resources/jquery/jquery-1.9.1.js"></script>
+  <script src="resources/bootstrap-3.3.6/js/bootstrap.js"></script>
+
 </html>
