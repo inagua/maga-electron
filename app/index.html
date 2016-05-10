@@ -236,7 +236,15 @@
                 <div class="form-group">
                   <label for="gameSynopsis" class="col-sm-2 control-label">Synopsis</label>
                   <div class="col-sm-10">
-                    <div class="input-group">
+                    <div class="panel panel-default" ng-hide="editing">
+                      <div id="collapseSynopsis" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSynopsis">
+                        <div class="panel-body">
+                          {{selectedGame.synopsis}}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="input-group" ng-show="editing">
                       <textarea class="form-control" id="gameSynopsis" rows="3" placeholder="Synopsis" ng-model="selectedGame.synopsis"></textarea>
                       <span class = "input-group-btn">
                         <button class = "btn btn-danger" type="button" ng-click="selectedGame.synopsis=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
@@ -295,7 +303,8 @@
                 <div class="form-group" ng-show="editing||selectedGame.nameVo">
                   <label for="gameNameVO" class="col-sm-2 control-label">Name VO</label>
                   <div class="col-sm-10">
-                    <div class="input-group">
+                    <input ng-hide="editing" type="text" class="form-control" id="gameNameVO" placeholder="Name VO" ng-model="selectedGame.nameVo">
+                    <div class="input-group" ng-show="editing">
                       <input type="text" class="form-control" id="gameNameVO" placeholder="Name VO" ng-model="selectedGame.nameVo">
                       <span class = "input-group-btn">
                         <button class = "btn btn-danger" type="button" ng-click="selectedGame.nameVo=undefined"><i class="fa fa-times-circle fa-lg"></i></button>
@@ -361,7 +370,24 @@
                 <div class="form-group" ng-show="editing||selectedGame.details">
                   <label for="gameDetails" class="col-sm-2 control-label">Details</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameDetails" rows="3" placeholder="Details" ng-model="selectedGame.details"></textarea>
+                    <div class="panel-group" id="accordionDetails" role="tablist" aria-multiselectable="true" ng-show="selectedGame.details&&!editing" title="Click to expend or collapse">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingDetails">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionDetails" href="#collapseDetails" aria-expanded="false" aria-controls="collapseDetails">
+                              {{selectedGame.details.substring(0,50)}}...
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseDetails" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDetails">
+                          <div class="panel-body">
+                            {{selectedGame.details}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <textarea ng-show="editing" class="form-control" id="gameDetails" rows="3" placeholder="Details" ng-model="selectedGame.details"></textarea>
                   </div>
                 </div>
 
@@ -370,16 +396,52 @@
                 <div class="form-group" ng-show="editing||selectedGame.goals">
                   <label for="gameGoals" class="col-sm-2 control-label">Goals</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameGoals" rows="3" placeholder="Goals" ng-model="selectedGame.goals"></textarea>
+
+                    <div class="panel-group" id="accordionGoals" role="tablist" aria-multiselectable="true" ng-show="selectedGame.goals&&!editing" title="Click to expend or collapse">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingGoals">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionGoals" href="#collapseGoals" aria-expanded="false" aria-controls="collapseGoals">
+                              {{selectedGame.goals.substring(0,50)}}...
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseGoals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGoals">
+                          <div class="panel-body">
+                            {{selectedGame.goals}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <textarea ng-show="editing" class="form-control" id="gameGoals" rows="3" placeholder="Goals" ng-model="selectedGame.goals"></textarea>
                   </div>
                 </div>
 
 
                 <!-- INSTRUCTIONS -->
-                <div class="form-group" ng-show="editing||selectedGame.instruction" title="{{selectedGame.instruction}}">
+                <div class="form-group" ng-show="editing||selectedGame.instruction" >
                   <label for="gameInstruction" class="col-sm-2 control-label">Instructions</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameInstruction" rows="5" placeholder="Instructions" ng-model="selectedGame.instruction"></textarea>
+
+                    <div class="panel-group" id="instructionsAccordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.instruction&&!editing" title="Click to expend or collapse">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingInstructions">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#instructionsAccordion" href="#collapseInstructions" aria-expanded="false" aria-controls="collapseInstructions">
+                              {{selectedGame.instruction.substring(0,50)}}...
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseInstructions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInstructions">
+                          <div class="panel-body">
+                            {{selectedGame.instruction}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <textarea ng-show="editing" class="form-control" id="gameInstruction" rows="5" placeholder="Instructions" ng-model="selectedGame.instruction"></textarea>
                   </div>
                 </div>
 
@@ -389,12 +451,12 @@
                   <label class="col-sm-2 control-label">Steps</label>
                   <div class="col-sm-10">
 
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.steps&&selectedGame.steps.length>0">
+                    <div class="panel-group" id="stepsAccordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.steps&&selectedGame.steps.length>0">
                       <div class="panel panel-default" ng-repeat="step in selectedGame.steps track by $index">
                         <div class="panel-heading" role="tab" id="heading{{$index}}">
                           <h4 class="panel-title">
                             <button ng-show="editing" class="btn btn-danger btn-xs" type="button" title="Click to remove this Step" ng-click="removeStep(step)"><i class="fa fa-times-circle"></i></button>
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
+                            <a role="button" data-toggle="collapse" data-parent="#stepsAccordion" href="#collapse{{$index}}" aria-expanded="false" aria-controls="collapse{{$index}}">
                               {{step.name}} <sup>{{step.duration}}<span ng-show="step.duration"> min</span></sup>
                             </a>
                           </h4>
@@ -564,19 +626,53 @@
 
 
                 <!-- LOGISTICS -->
-                <div class="form-group" ng-show="editing||selectedGame.logistics">
+                <div class="form-group" ng-show="editing||selectedGame.logistic">
                   <label for="gameLogistics" class="col-sm-2 control-label">Logistics</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="gameLogistics" rows="2" placeholder="Logistics" ng-model="selectedGame.logistics[0]"></textarea>
+                    <div class="panel-group" id="accordionLogistics" role="tablist" aria-multiselectable="true" ng-show="selectedGame.logistic&&!editing" title="Click to expend or collapse">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingLogistics">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionLogistics" href="#collapseLogistics" aria-expanded="false" aria-controls="collapseLogistics">
+                              {{selectedGame.logistic.substring(0,50)}}...
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseLogistics" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLogistics">
+                          <div class="panel-body">
+                            {{selectedGame.logistic}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <textarea ng-show="editing" class="form-control" id="gameLogistics" rows="3" placeholder="Logistics" ng-model="selectedGame.logistic"></textarea>
                   </div>
                 </div>
 
 
                 <!-- PREPARATIONS -->
-                <div class="form-group" ng-show="editing||selectedGame.preparations">
+                <div class="form-group" ng-show="editing||selectedGame.preparation">
                   <label for="gamePreparations" class="col-sm-2 control-label">Preparations</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="gamePreparations" placeholder="Preparations" ng-model="selectedGame.preparations[0]">
+                    <div class="panel-group" id="accordionPreparation" role="tablist" aria-multiselectable="true" ng-show="selectedGame.preparation&&!editing" title="Click to expend or collapse">
+                      <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingPreparation">
+                          <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordionPreparation" href="#collapsePreparation" aria-expanded="false" aria-controls="collapsePreparation">
+                              {{selectedGame.preparation.substring(0,50)}}...
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapsePreparation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPreparation">
+                          <div class="panel-body">
+                            {{selectedGame.preparation}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <textarea ng-show="editing" class="form-control" id="gamePreparations" rows="3" placeholder="Preparations" ng-model="selectedGame.preparation"></textarea>
                   </div>
                 </div>
 
