@@ -238,8 +238,7 @@
                   <div class="col-sm-10">
                     <div class="panel panel-default" ng-hide="editing">
                       <div id="collapseSynopsis" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingSynopsis">
-                        <div class="panel-body">
-                          {{selectedGame.synopsis}}
+                        <div class="panel-body" ng-bind-html="htmlify(selectedGame.synopsis)">
                         </div>
                       </div>
                     </div>
@@ -380,8 +379,7 @@
                           </h4>
                         </div>
                         <div id="collapseDetails" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDetails">
-                          <div class="panel-body">
-                            {{selectedGame.details}}
+                          <div class="panel-body" ng-bind-html="htmlify(selectedGame.details)">
                           </div>
                         </div>
                       </div>
@@ -407,8 +405,7 @@
                           </h4>
                         </div>
                         <div id="collapseGoals" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingGoals">
-                          <div class="panel-body">
-                            {{selectedGame.goals}}
+                          <div class="panel-body" ng-bind-html="htmlify(selectedGame.goals)">
                           </div>
                         </div>
                       </div>
@@ -434,8 +431,7 @@
                           </h4>
                         </div>
                         <div id="collapseInstructions" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInstructions">
-                          <div class="panel-body">
-                            {{selectedGame.instruction}}
+                          <div class="panel-body" ng-bind-html="htmlify(selectedGame.instruction)">
                           </div>
                         </div>
                       </div>
@@ -462,8 +458,7 @@
                           </h4>
                         </div>
                         <div id="collapse{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{$index}}">
-                          <div class="panel-body">
-                            {{step.details}}
+                          <div class="panel-body" ng-bind-html="htmlify(step.details)">
                           </div>
                         </div>
                       </div>
@@ -639,8 +634,7 @@
                           </h4>
                         </div>
                         <div id="collapseLogistics" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLogistics">
-                          <div class="panel-body">
-                            {{selectedGame.logistic}}
+                          <div class="panel-body" ng-bind-html="htmlify(selectedGame.logistic)">
                           </div>
                         </div>
                       </div>
@@ -665,8 +659,7 @@
                           </h4>
                         </div>
                         <div id="collapsePreparation" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPreparation">
-                          <div class="panel-body">
-                            {{selectedGame.preparation}}
+                          <div class="panel-body" ng-bind-html="htmlify(selectedGame.preparation)">
                           </div>
                         </div>
                       </div>

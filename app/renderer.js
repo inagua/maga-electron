@@ -17,11 +17,9 @@ var BUTTON_EDITION_EDIT = "  Edit  ";
 var BUTTON_EDITION_VALIDATE = "Validate";
 var ARTICLES = ['the', 'a', 'le', 'la', 'les', "l'", 'un', 'une', 'des'];
 
-String.prototype.startsWith = function (str) {
-    return !this.indexOf(str);
-};
+String.prototype.startsWith = function (str) { return !this.indexOf(str); };
 
-angularApp.controller('MagaMain', function ($scope) {
+angularApp.controller('MagaMain', function ($scope, $sce) {
 
     var clearFilterFields = function() {
         $scope.gameFilterPattern = undefined;
@@ -170,6 +168,9 @@ angularApp.controller('MagaMain', function ($scope) {
             }
         }
         return undefined;
+    };
+    $scope.htmlify = function(string) {
+        return $sce.trustAsHtml(string.replace(/\n/g, '<br>'));
     };
 
     // UI CALLBACKS
