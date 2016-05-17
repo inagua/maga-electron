@@ -468,6 +468,38 @@
                   </div>
                 </div>
 
+                <!-- VARIANTS -->
+                <div class="form-group" ng-show="editing||selectedGame.variants">
+                  <label class="col-sm-2 control-label">Variants</label>
+                  <div class="col-sm-10">
+
+                    <div class="panel-group" id="variantsAccordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.variants&&selectedGame.variants.length>0">
+                      <div class="panel panel-default" ng-repeat="variant in selectedGame.variants track by $index">
+                        <div class="panel-heading" role="tab" id="headingVariant{{$index}}">
+                          <h4 class="panel-title">
+                            <button ng-show="editing" class="btn btn-danger btn-xs" type="button" title="Click to remove this Variant" ng-click="removeVariant(variant)"><i class="fa fa-times-circle"></i></button>
+                            <a role="button" data-toggle="collapse" data-parent="#variantsAccordion" href="#collapseVariant{{$index}}" aria-expanded="false" aria-controls="collapseVariant{{$index}}">
+                              {{variant.name}}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseVariant{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingVariant{{$index}}">
+                          <div class="panel-body" ng-bind-html="htmlify(variant.details)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <span ng-show="editing">
+                      <input type="text" class="form-control" placeholder="New Variant name" ng-model="newVariantName">
+                      <textarea class="form-control" rows="3" placeholder="New Variant details" ng-model="newVariantDetails"></textarea>
+                      <button class = "btn btn-success" type="button"
+                              title="Add new Variant"
+                              ng-disabled="!newVariantName" ng-click="addVariant()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                    </span>
+
+                  </div>
+                </div>
 
                 <!-- TYPE -->
                 <div class="form-group" ng-show="editing||selectedGame.type">

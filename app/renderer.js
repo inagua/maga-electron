@@ -461,6 +461,26 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
     };
 
 
+    // FIELD: VARIANS
+    //
+    $scope.removeVariant = function (variant) {
+        var i = $scope.selectedGame.variants.indexOf(variant);
+        if (i > -1) {
+            $scope.selectedGame.variants.splice(i, 1);
+        }
+    };
+    $scope.addVariant = function () {
+        var newVariant = { "name":$scope.newVariantName, "details":$scope.newVariantDetails };
+        if ($scope.newVariantName && $scope.newVariantName.trim().length > 0) {
+            if (!$scope.selectedGame.variants) { $scope.selectedGame.variants = []; }
+            if ($scope.selectedGame.variants.indexOf(newVariant) == -1) {
+                $scope.selectedGame.variants.push(newVariant);
+            }
+        }
+        $scope.newVariantName = $scope.newVariantDetails = undefined;
+    };
+
+
     // FIELD: MATERIAL
     //
     $scope.removeMaterial = function (material) {
