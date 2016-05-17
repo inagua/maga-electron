@@ -232,7 +232,7 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
             console.log("JSON backuped as:", newPath);
 
             // save
-            var json = JSON.stringify($scope.games, null, 4);
+            var json = JSON.stringify($scope.allGames, null, 4);
             fs.writeFile($scope.jsonURL, json, function (err) {
                 if (err) return console.log(err);
                 console.log('JSON saved!');
