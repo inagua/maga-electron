@@ -172,8 +172,9 @@
           <!-- sidebar -->
           <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation" style="background-color: linen; margin-top: -45px;">
 
+            <!-- SEARCH BAR -->
             <div class = "input-group" style="padding-right: 15px; padding-top: 35px;">
-              <input type="text" class="form-control" placeholder="Filter on name" ng-model="gameFilterPattern">
+              <input type="text" class="form-control" placeholder="Filter on name" ng-model="gameFilterPattern" title="Can use: 'tag:wantedTag' or 'agile:wantedAgileTopic'">
               <span class = "input-group-btn">
                 <button class = "btn btn-danger" type="button" ng-click="clearFilterButtonClicked()"><i class="fa fa-times-circle fa-lg"></i></button>
               </span>
@@ -184,15 +185,6 @@
                 <input type="checkbox" ng-model="gameFilterFullSearch"> Search all fields?
               </label>
             </div>
-            <!-- div class="form-group">
-  <div class="col-sm-offset-2 col-sm-10">
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> Remember me
-      </label>
-    </div>
-  </div>
-</div -->
 
             <h2>{{games.length}}/{{allGames.length}} Games</h2>
 
@@ -550,7 +542,7 @@
                   <div class="col-sm-10">
 
                     <ul class="form-control-static list-inline" ng-hide="editing">
-                      <li class="label label-info" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px;">{{agileTopic}}</li>
+                      <li class="label label-info" ng-repeat="agileTopic in selectedGame.agileTopics" style="margin-left: 5px; cursor: pointer;" ng-click="agileTopicClicked(agileTopic)" title="Filter this Agile Topic">{{agileTopic}}</li>
                     </ul>
 
                     <span ng-show="editing">
@@ -716,7 +708,7 @@
                   <label class="col-sm-2 control-label">Tags</label>
                   <div class="col-sm-10">
                     <ul class="form-control-static list-inline" ng-hide="editing">
-                      <li class="label label-info" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px;">{{tag}}</li>
+                      <li class="label label-info" ng-repeat="tag in selectedGame.tags" style="margin-left: 5px; cursor: pointer;" ng-click="tagClicked(tag)" title="Filter this Tag">{{tag}}</li>
                     </ul>
 
                     <span ng-show="editing">

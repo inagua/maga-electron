@@ -262,15 +262,25 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
         if (!pattern || pattern.length == 0) {
             $scope.games = $scope.allGames;
         } else {
-            var pattern = pattern.toUpperCase();
+            var patternUppercase = pattern.toUpperCase();
             $scope.games = [];
             $scope.allGames.forEach(function (g) {
                 var place = g.name;
+                place = place.toUpperCase();
                 if ($scope.gameFilterFullSearch) {
                     place = JSON.stringify(g);
                 }
-                place = place.toUpperCase();
-                if (place.indexOf(pattern) > -1) {
+                if (pattern.startsWith("tag:")) {
+                    var tag = pattern.replace("tag:", "");
+                    if (tag && g.tags && g.tags.indexOf(tag) > -1) {
+                        $scope.games.push(g);
+                    }
+                } else if (pattern.startsWith("agile:")) {
+                    var topic = pattern.replace("agile:", "");
+                    if (topic && g.agileTopics && g.agileTopics.indexOf(topic) > -1) {
+                        $scope.games.push(g);
+                    }
+                } else if (place.indexOf(patternUppercase) > -1) {
                     $scope.games.push(g);
                 }
             });
@@ -469,4 +479,12 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
         $scope.newMaterial = undefined;
     };
 
+    // Clickable Tags
+    //
+    $scope.tagClicked = function (tag) {
+        $scope.gameFilterPattern = "tag:" + tag;
+    };
+    $scope.agileTopicClicked = function (agile) {
+        $scope.gameFilterPattern = "agile:" + agile;
+    };
 });
