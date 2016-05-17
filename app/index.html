@@ -501,6 +501,47 @@
                   </div>
                 </div>
 
+                <!-- PERFORMANCES -->
+                <div class="form-group" ng-show="editing||selectedGame.performances">
+                  <label class="col-sm-2 control-label">Performance</label>
+                  <div class="col-sm-10">
+
+                    <div class="panel-group" id="performancesAccordion" role="tablist" aria-multiselectable="true" ng-show="selectedGame.performances&&selectedGame.performances.length>0">
+                      <div class="panel panel-default" ng-repeat="performance in selectedGame.performances track by $index">
+                        <div class="panel-heading" role="tab" id="headingPerformance{{$index}}">
+                          <h4 class="panel-title">
+                            <button ng-show="editing" class="btn btn-danger btn-xs" type="button" title="Click to remove this Performance" ng-click="removePerformance(performance)"><i class="fa fa-times-circle"></i></button>
+                            <a role="button" data-toggle="collapse" data-parent="#performancesAccordion" href="#collapsePerformance{{$index}}" aria-expanded="false" aria-controls="collapsePerformance{{$index}}">
+                              {{performance.name}}
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapsePerformance{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPerformance{{$index}}">
+                          <div class="panel-body">
+                            <h3>{{performance.date}} - {{performance.place}}</h3>
+                            <p ng-bind-html="htmlify(performance.details)">
+                            </p>
+                            <p ng-bind-html="htmlify(performance.feedbacks)">
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <span ng-show="editing">
+                      <input type="text" class="form-control" placeholder="New Performance name" ng-model="newPerformanceName">
+                      <input type="text" class="form-control" placeholder="New Performance date (dd/MM/yyyy)" ng-model="newPerformanceDate">
+                      <input type="text" class="form-control" placeholder="New Performance place" ng-model="newPerformancePlace">
+                      <textarea class="form-control" rows="3" placeholder="New Performance details" ng-model="newPerformanceDetails"></textarea>
+                      <textarea class="form-control" rows="3" placeholder="New Performance feedbacks" ng-model="newPerformanceFeedbacks"></textarea>
+                      <button class = "btn btn-success" type="button"
+                              title="Add new Performance"
+                              ng-disabled="!newPerformanceName" ng-click="addPerformance()"><i class="fa fa-plus-circle fa-lg"></i></button>
+                    </span>
+
+                  </div>
+                </div>
+
                 <!-- TYPE -->
                 <div class="form-group" ng-show="editing||selectedGame.type">
                   <label for="gameType" class="col-sm-2 control-label">Type</label>

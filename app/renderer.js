@@ -461,7 +461,7 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
     };
 
 
-    // FIELD: VARIANS
+    // FIELD: VARIANTS
     //
     $scope.removeVariant = function (variant) {
         var i = $scope.selectedGame.variants.indexOf(variant);
@@ -478,6 +478,37 @@ angularApp.controller('MagaMain', function ($scope, $sce) {
             }
         }
         $scope.newVariantName = $scope.newVariantDetails = undefined;
+    };
+
+
+    // FIELD: PERFORMANCES
+    //
+    $scope.removePerformance = function (performance) {
+        var i = $scope.selectedGame.performances.indexOf(performance);
+        if (i > -1) {
+            $scope.selectedGame.performances.splice(i, 1);
+        }
+    };
+    $scope.addPerformance = function () {
+        var newPerformance = {
+            "name":$scope.newPerformanceName,
+            "date":$scope.newPerformanceDate,
+            "place":$scope.newPerformancePlace,
+            "details":$scope.newPerformanceDetails,
+            "feedbacks":$scope.newPerformanceFeedbacks
+        };
+        if ($scope.newPerformanceName && $scope.newPerformanceName.trim().length > 0) {
+            if (!$scope.selectedGame.performances) { $scope.selectedGame.performances = []; }
+            if ($scope.selectedGame.performances.indexOf(newPerformance) == -1) {
+                $scope.selectedGame.performances.push(newPerformance);
+            }
+        }
+        $scope.newPerformanceName
+            = $scope.newPerformanceDate
+            = $scope.newPerformancePlace
+            = $scope.newPerformanceDetails
+            = $scope.newPerformanceFeedbacks
+            = undefined;
     };
 
 
